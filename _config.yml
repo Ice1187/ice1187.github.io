@@ -93,7 +93,7 @@ analytics:
 # Site Author
 author:
   name             : "Ice1187"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/avatar.jpeg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "A CS student/CTF player interested in Security."
   location         : # "Somewhere"
   email            :
