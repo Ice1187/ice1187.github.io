@@ -1,12 +1,12 @@
 ---
-title: "Post: Image (Caption)"
+title: 'Post: Image (Caption)'
 categories:
-  - Post Formats
+- Post Formats
 tags:
-  - image
-  - Post Formats
----
+- image
+- Post Formats
 
+---
 {% capture fig_img %}
 ![Foo]({{ "/assets/images/unsplash-gallery-image-3.jpg" | relative_url }})
 {% endcapture %}
