@@ -1,10 +1,11 @@
 ---
-permalink: /terms/
-title: "Terms and Privacy Policy"
-last_modified_at: 2017-10-20T12:42:38-04:00
+permalink: "/terms/"
+title: Terms and Privacy Policy
+last_modified_at: 2017-10-20T12:42:38.000-04:00
 toc: true
----
+published: false
 
+---
 ## Privacy Policy
 
 The privacy of my visitors is extremely important. This Privacy Policy outlines the types of personal information that is received and collected and how it is used.
