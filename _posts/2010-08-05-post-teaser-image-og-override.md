@@ -10,7 +10,7 @@ tags:
 - edge case
 - image
 - layout
-last_modified_at: 2017-10-26T19:12:19.000+00:00
+last_modified_at: '2017-10-26T19:12:19.000+00:00'
 
 ---
 This post has a teaser image with an OpenGraph override.
