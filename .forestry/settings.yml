@@ -7,12 +7,20 @@ sections:
 - type: jekyll-posts
   label: All posts
   create: all
-  match: "**/*"
-  new_doc_ext: ".md"
+  new_doc_ext: md
   templates:
   - about
   - post-header
   - post-standard
+- type: directory
+  path: _drafts
+  label: Drafts
+  create: documents
+  match: "*.md"
+  templates:
+  - post-standard
+  - post-header
+  - about
 - type: heading
   label: Content
 - type: directory
