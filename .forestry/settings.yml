@@ -4,6 +4,15 @@ auto_deploy: false
 admin_path: ''
 webhook_url: 
 sections:
+- type: directory
+  path: _drafts
+  label: Drafts
+  create: all
+  match: "*.md"
+  templates:
+  - about
+  - post-header
+  - post-standard
 - type: heading
   label: Content
 - type: directory
@@ -19,15 +28,6 @@ sections:
   label: Pages
   create: documents
   match: "*.md"
-- type: directory
-  path: _drafts
-  label: Drafts
-  create: all
-  match: "*.md"
-  templates:
-  - about
-  - post-header
-  - post-standard
 - type: heading
   label: Collections
 - type: directory
