@@ -12,15 +12,6 @@ sections:
   - about
   - post-header
   - post-standard
-- type: directory
-  path: _drafts
-  label: Drafts
-  create: documents
-  match: "*.md"
-  templates:
-  - post-standard
-  - post-header
-  - about
 - type: heading
   label: Content
 - type: directory
