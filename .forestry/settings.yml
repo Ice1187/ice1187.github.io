@@ -4,6 +4,15 @@ auto_deploy: false
 admin_path: ''
 webhook_url: 
 sections:
+- type: jekyll-posts
+  label: All posts
+  create: all
+  match: "**/*"
+  new_doc_ext: ".md"
+  templates:
+  - about
+  - post-header
+  - post-standard
 - type: heading
   label: Content
 - type: directory
