@@ -9,6 +9,9 @@ excerpt_separator: ''
 ---
 This is excerpt. Cool!
 
+Or this
+
+Hope this
 
 ## h2
 
