@@ -5,7 +5,7 @@ main:
   #- title: "About"
   #  url: /about/
   - title: "HTB"
-    url: /htb/
+    url: /categories/htb/
   - title: "Tags"
     url: /tags/
   - title: "Sample Collections"
