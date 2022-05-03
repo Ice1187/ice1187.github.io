@@ -12,6 +12,6 @@ tags:
 {% endcapture %}
 
 <figure>
-  {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
-  <figcaption>Photo from Unsplash.</figcaption>
+{{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
+<figcaption>Photo from Unsplash.</figcaption>
 </figure>
