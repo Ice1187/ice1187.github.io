@@ -11,10 +11,10 @@ published: false
 ---
 ## Luanne
 
-***
+---
 
-I'm trying to add some image\~\~.
+I'm trying to add some image~~.
 
 **image**
 
-!\[test image\]({{ "/assets/images/unsplash-image-6.jpg" | relative_url }})
+![test image]({{ "/assets/images/unsplash-image-6.jpg" | relative_url }})
