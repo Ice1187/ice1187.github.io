@@ -24,3 +24,5 @@ fields:
   type: boolean
   label: toc_sticky
   default: true
+pages:
+- _htb/htb-luanne.md

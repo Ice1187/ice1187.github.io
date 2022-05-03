@@ -30,6 +30,13 @@ sections:
 - type: heading
   label: Collections
 - type: directory
+  path: _htb
+  label: HTB
+  create: all
+  match: "*.md"
+  templates:
+  - post-standard
+- type: directory
   path: _recipes
   label: Recipes
   create: documents
