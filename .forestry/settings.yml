@@ -28,14 +28,16 @@ sections:
   create: documents
   match: "*.md"
 - type: heading
-  label: Collections
+  label: CATEGORIES
 - type: directory
-  path: _htb
+  path: _posts
   label: HTB
-  create: all
-  match: "*.md"
+  create: documents
+  match: htb*.md
   templates:
   - post-standard
+- type: heading
+  label: Collections
 - type: directory
   path: _recipes
   label: Recipes
