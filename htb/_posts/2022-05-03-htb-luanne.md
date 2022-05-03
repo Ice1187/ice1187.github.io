@@ -7,11 +7,11 @@ title: 'HTB: Luanne'
 excerpt_separator: ''
 
 ---
+This is excerpt. Cool!
+
 ## Luanne
 
----
-
-I'm trying to add some image~~.
+I'm trying to add some image\~\~.
 
 **image**
 
