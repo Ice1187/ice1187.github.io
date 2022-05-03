@@ -1,6 +1,6 @@
 ---
+title: "HackTheBox Writeups"
 layout: collection
-title: "HackTheBox"
 collection: htb
 permalink: /htb/
 ---

@@ -268,6 +268,9 @@ collections:
   pets:
     output: true
     permalink: /:collection/:path/
+  htb:
+    output: true
+    permalink: /:collection/:path/
 
 
 # Defaults
@@ -304,6 +307,15 @@ defaults:
   - scope:
       path: ""
       type: pets
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comment: true
+  # _htb
+  - scope:
+      path: ""
+      type: htb
     values:
       layout: single
       author_profile: true
