@@ -313,11 +313,11 @@ defaults:
       share: true
       comment: true
   # _htb
-  - scope:
-      path: ""
-      type: htb
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comment: true
+  #- scope:
+  #    path: ""
+  #    type: htb
+  #  values:
+  #    layout: single
+  #    author_profile: true
+  #    share: true
+  #    comment: true

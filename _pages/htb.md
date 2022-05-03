@@ -1,8 +1,8 @@
 ---
 title: "HackTheBox Writeups"
-layout: collection
-collection: htb
-permalink: /htb/
+layout: category
+permalink: /categories/htb/
+taxonomy: htb
 ---
 
 My HackTheBox writeups.
