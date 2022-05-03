@@ -22,4 +22,5 @@ fields:
   label: toc_sticky
   default: true
 pages:
+- _posts/another-test.md
 - htb/_posts/2022-05-03-htb-luanne.md
