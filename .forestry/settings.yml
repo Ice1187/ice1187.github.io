@@ -30,10 +30,10 @@ sections:
 - type: heading
   label: CATEGORIES
 - type: directory
-  path: _posts
+  path: _posts/htb
   label: HTB
   create: documents
-  match: htb*.md
+  match: "*.md"
   templates:
   - post-standard
 - type: heading
