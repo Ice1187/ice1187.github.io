@@ -12,4 +12,4 @@ This is excerpt.
 
 cool.
 
-![test]({{ 
+![test]({{ "/assets/images/unsplash-image-11.jpg" | relative_url }})
