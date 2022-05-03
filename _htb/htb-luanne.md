@@ -11,3 +11,7 @@ excerpt_separator: ''
 ## Testing Images
 
 !\[test image\](/images/unsplash-image-6.jpg)
+
+## Insert Directly
+
+![](/images/unsplash-image-6.jpg)
