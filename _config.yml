@@ -268,9 +268,9 @@ collections:
   pets:
     output: true
     permalink: /:collection/:path/
-  htb:
-    output: true
-    permalink: /:collection/:path/
+  #htb:
+  #  output: true
+  #  permalink: /:collection/:path/
 
 
 # Defaults
