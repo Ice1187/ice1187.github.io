@@ -13,3 +13,5 @@ This is excerpt.
 cool.
 
 ![test]({{ "/assets/images/unsplash-image-11.jpg" | relative_url }}){: width="800"}
+
+![image]({{ "/assets/images/unsplash-image-8.jpg" | relative_url }}){: width="800"}
