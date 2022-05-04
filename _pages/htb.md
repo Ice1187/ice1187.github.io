@@ -1,7 +1,7 @@
 ---
 title: "HackTheBox Writeups"
 layout: category
-permalink: /categories/htb/
+permalink: /htb/
 taxonomy: htb
 ---
 
