@@ -23,5 +23,4 @@ fields:
   default: true
 pages:
 - _posts/2022-05-03-another-test.md
-- _posts/google-meet.md
 - htb/_posts/2022-05-03-htb-luanne.md
