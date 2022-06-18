@@ -5,7 +5,7 @@ main:
   #- title: "About"
   #  url: /about/
   - title: "HackTheBox"
-    url: /htb/
+    url: /hackthebox/
   - title: "Tags"
     url: /tags/
     #- title: "Sample Collections"
