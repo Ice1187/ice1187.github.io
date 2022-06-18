@@ -6,6 +6,8 @@ main:
   #  url: /about/
   - title: "HackTheBox"
     url: /hackthebox/
+  - title: "Reinforcement Learning"
+    url: /rl/
   - title: "Tags"
     url: /tags/
     #- title: "Sample Collections"
