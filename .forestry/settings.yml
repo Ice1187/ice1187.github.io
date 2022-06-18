@@ -33,7 +33,7 @@ sections:
   path: htb
   label: HTB
   create: all
-  match: "*.md"
+  match: "**/*.md"
   templates:
   - post-standard
 - type: heading
