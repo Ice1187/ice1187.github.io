@@ -30,8 +30,15 @@ sections:
 - type: heading
   label: CATEGORIES
 - type: directory
+  path: htb/_drafts
+  label: HTB -- drafts
+  create: all
+  match: "*.md"
+  templates:
+  - post-standard
+- type: directory
   path: htb/_posts
-  label: HTB
+  label: HTB -- posts
   create: all
   match: "*.md"
   templates:
