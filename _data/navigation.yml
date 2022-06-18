@@ -4,7 +4,7 @@ main:
   #  url: /quick-start-guide/
   #- title: "About"
   #  url: /about/
-  - title: "HackTheBox"
+  - title: "Hack The Box"
     url: /hackthebox/
   - title: "Reinforcement Learning"
     url: /rl/
