@@ -5,7 +5,7 @@ tags:
 - cuda
 toc: true
 toc_sticky: true
-title: Find PyTorch that supports your GPU
+title: How to Find PyTorch that supports your GPU
 
 ---
 If PyTorch shows the following messages, then it means PyTorch doesn't compile with a CUDA version compatible with the GPU.
