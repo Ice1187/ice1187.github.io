@@ -30,14 +30,14 @@ sections:
 - type: heading
   label: CATEGORIES
 - type: directory
-  path: htb/_drafts
+  path: hackthebox/_drafts
   label: HTB -- drafts
   create: all
   match: "*.md"
   templates:
   - post-standard
 - type: directory
-  path: htb/_posts
+  path: hackthebox/_posts
   label: HTB -- posts
   create: all
   match: "*.md"
