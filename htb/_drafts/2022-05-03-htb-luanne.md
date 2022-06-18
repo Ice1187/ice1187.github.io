@@ -4,6 +4,7 @@ categories: []
 tags: []
 toc: true
 toc_sticky: true
+published: false
 
 ---
 The preferred way of using images is placing them in the `/assets/images/` directory and referencing them with an absolute path. Prepending the filename with `{% raw %}{{ site.url }}{{ site.baseurl }}/assets/images/{% endraw %}` will make sure your images display properly in feeds and such.
