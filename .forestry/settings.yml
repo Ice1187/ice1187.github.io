@@ -43,6 +43,20 @@ sections:
   match: "*.md"
   templates:
   - post-standard
+- type: directory
+  path: reinforcement-learning/_drafts
+  label: RL -- drafts
+  create: all
+  match: "*.md"
+  templates:
+  - post-standard
+- type: directory
+  path: reinforcement-learning/_posts
+  label: RL -- posts
+  create: all
+  match: "*.md"
+  templates:
+  - post-standard
 - type: heading
   label: Collections
 - type: directory
