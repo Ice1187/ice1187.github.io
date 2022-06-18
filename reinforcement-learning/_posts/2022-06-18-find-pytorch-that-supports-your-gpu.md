@@ -19,7 +19,7 @@ To addrees the problem:
 1. Go to [CUDA GPUs - Compute Capability](https://developer.nvidia.com/cuda-gpus).
 2. Open the section the GPU might be in, e.g., `GeForce RTX 3090` is in "CUDA-Enabled GeForce and TITAN Products".
 3. Find the "Compute Capability" of the GPU, e.g., `GeForce RTX 3090` has the value `8.6`.
-4. Go to [CUDA Compatibility -- FAQ -> Which GPUs are supported by the driver?](https://docs.nvidia.com/deploy/cuda-compatibility/index.html#faq__docs-internal-guid-d9200e15-7fff-2037-c3ce-62bfbccf325e), and find the driver version that supports the "Compute Capability" of the GPU, e.g., the lowest driver version supports `GeForce RTX 3090` is `450.36.06+`.
+4. Go to [CUDA Compatibility -- FAQ -> Which GPUs are supported by the driver?](https://docs.nvidia.com/deploy/cuda-compatibility/index.html#faq__docs-internal-guid-d9200e15-7fff-2037-c3ce-62bfbccf325e), then find the driver version that supports the "Compute Capability" of the GPU, e.g., the lowest driver version supports `GeForce RTX 3090` is `450.36.06+`.
    ![GPU vs driver]({{ "/assets/images/gpu-driver.png" | relative_url }}){: width="800"}
 5. Go to [CUDA Application Compatibility Support Matrix](https://docs.nvidia.com/deploy/cuda-compatibility/index.html#use-the-right-compat-package__table-cuda-application-support-matrix) table on the same page, and find the CUDA toolkit version that supports the corresponding driver version, e.g., the lowest CUDA toolkit version for `GeForce RTX 3090`, driver `450.36.06+`, is `11.0`.
    ![CUDA Application Compatibility Support Matrix]({{ "/assets/images/cuda-compatibility-support-matrix.png" | relative_url }}){: width="800"}
