@@ -4,13 +4,6 @@ auto_deploy: false
 admin_path: ''
 webhook_url: 
 sections:
-- type: directory
-  path: reinforcement-learning/_drafts
-  label: RL -- drafts
-  create: all
-  match: "*.md"
-  templates:
-  - post-standard
 - type: jekyll-posts
   label: All posts
   create: all
@@ -46,6 +39,20 @@ sections:
 - type: directory
   path: hackthebox/_posts
   label: HTB -- posts
+  create: all
+  match: "*.md"
+  templates:
+  - post-standard
+- type: directory
+  path: reinforcement-learning/_drafts
+  label: RL -- drafts
+  create: all
+  match: "*.md"
+  templates:
+  - post-standard
+- type: directory
+  path: reinforcement-learning/_posts
+  label: RL -- posts
   create: all
   match: "*.md"
   templates:
