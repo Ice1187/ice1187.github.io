@@ -8,7 +8,7 @@ toc_sticky: true
 title: How to Find PyTorch that supports your GPU
 
 ---
-If PyTorch shows the following messages, then it means PyTorch doesn't compile with a CUDA version compatible with the GPU.
+If PyTorch shows the following messages, then it means your PyTorch doesn't compile with a CUDA version compatible with your GPU.
 
     UserWarning: GeForce RTX 3090 with CUDA capability sm_86 is not compatible with the current PyTorch installation. The current PyTorch install supports CUDA capabilities ...
     
@@ -25,10 +25,13 @@ To addrees the problem:
    ![CUDA Application Compatibility Support Matrix]({{ "/assets/images/cuda-compatibility-support-matrix.png" | relative_url }}){: width="800"}
 6. After found out the Compute Capability and CUDA toolkit version for the GPU, go to [PyTorch Stable Wheel](https://download.pytorch.org/whl/torch_stable.html). Every wheel with `cuXXX` where `XXX` is at least as large as the needed CUDA toolkit version should be usable, e.g., the minimum PyTorch version that supports `GeForce RTX 3090` should be `torch-1.7.0`, since it's the first one to starts with `cu110`, which means CUDA toolkit `11.0`.
 7. Finally, install the PyTorch with the CUDA toolkit version needed with:
-  ```bash
-  pip install torch==<torch.version>+cu<XXX> -f https://download.pytorch.org/whl/torch_stable.html
-  ```
-  For example, to install PyTorch `1.8.1` with CUDA toolkit `11.1`:
-  ```bash
-  pip install torch==1.8.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
-  ```
+
+```bash
+pip install torch==<torch.version>+cu<XXX> -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+For example, to install PyTorch `1.8.1` with CUDA toolkit `11.1`:
+
+```bash
+pip install torch==1.8.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+```
