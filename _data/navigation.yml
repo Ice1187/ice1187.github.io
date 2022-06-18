@@ -4,7 +4,7 @@ main:
   #  url: /quick-start-guide/
   #- title: "About"
   #  url: /about/
-  - title: "HTB"
+  - title: "HackTheBox"
     url: /htb/
   - title: "Tags"
     url: /tags/
