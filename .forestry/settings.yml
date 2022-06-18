@@ -32,7 +32,7 @@ sections:
 - type: directory
   path: htb
   label: HTB
-  create: documents
+  create: all
   match: "*.md"
   templates:
   - post-standard
