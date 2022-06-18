@@ -5,4 +5,4 @@ permalink: /rl/
 taxonomy: reinforcement-learning
 ---
 
-Anything about Reinforcement Learning.
+Everything about Reinforcement Learning.
