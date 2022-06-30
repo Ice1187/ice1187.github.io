@@ -23,4 +23,5 @@ fields:
   default: true
 pages:
 - _posts/2022-05-03-another-test.md
+- _posts/ais3-2022-pre-exam-writeup.md
 - reinforcement-learning/_posts/2022-06-18-find-pytorch-that-supports-your-gpu.md
