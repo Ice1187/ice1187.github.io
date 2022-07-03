@@ -13,7 +13,7 @@ title: AIS3 2022 Pre-exam Writeup
 
 不得不說 AIS3 pre-exam 每年都有用心在出題目，相較 CTFTime 上常有些不明所以的 CTF，pre-exam 打起來都是很開心的。
 
-### Rank
+## Rank
 
 * Team: `Ice1187`
 * Ranking: 2nd
