@@ -126,7 +126,7 @@ Flag: `AIS3{chaNcH4n_a1_Ch1k1ch1k1_84n8An_M1nNa_5upa5utA_n0_TAMa90_5a}`
 
 4. 用 `gdb` 追進去，看到 `Thread dubugging` 因此猜測可能有 call `fork` 或 `execve` 之類的 system call。用 `catch syscall` 在遇到 syscall 時中斷，發現其透過 `execve` 執行 `python`。
 
-    ```gdb
+    ```bash
     pwndbg> r
     Starting program: /flag_checker
     warning: Error disabling address space randomization: Operation not permitted
