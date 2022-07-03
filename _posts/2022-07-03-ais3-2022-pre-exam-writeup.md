@@ -55,25 +55,25 @@ title: AIS3 2022 Pre-exam Writeup
 
 2. 使用 `z3` 找出正確的輸入即為 flag，詳細 code 可以參考 `solve.py`。
 
-```python
-from z3 import *
+    ```python
+    from z3 import *
 
-a = [BitVec(f'a[{i}]', 8) for i in range(46)]
-solver = Solver()
+    a = [BitVec(f'a[{i}]', 8) for i in range(46)]
+    solver = Solver()
 
-solver.add(a[0] == ord('A'))
+    solver.add(a[0] == ord('A'))
 
-# AIS3
-offset = 1
-solver.add(a[14+offset] == ord('A'))
-solver.add(a[3+offset] == ord('{'))
-array = [30, 4, 100]
-for i in range(len(array)):
-    solver.add((a[i+offset] ^ ord('W')) == array[i])
-print(solver.check())
+    # AIS3
+    offset = 1
+    solver.add(a[14+offset] == ord('A'))
+    solver.add(a[3+offset] == ord('{'))
+    array = [30, 4, 100]
+    for i in range(len(array)):
+        solver.add((a[i+offset] ^ ord('W')) == array[i])
+    print(solver.check())
 
-# more checks...
-```
+    # more checks...
+    ```
 
 **Flag: `AIS3{D0T_N3T_FRAm3W0rk_15_S0_C0mPlicaT3d__G_G}`**
 
