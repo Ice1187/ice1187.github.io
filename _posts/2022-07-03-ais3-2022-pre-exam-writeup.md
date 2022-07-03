@@ -9,7 +9,6 @@ toc_sticky: true
 title: AIS3 2022 Pre-exam Writeup
 
 ---
-
 - Team: `Ice1187`
 - Ranking: 2nd
 
@@ -76,6 +75,7 @@ print(solver.check())
 <img width="947" alt="wenyan-code" src="https://user-images.githubusercontent.com/38059464/176665877-d7ad91d9-6466-4fd4-b117-c9424b3b1ca2.png">
 
 2. 可以透過以下指令執行 `殼.wy` 和將其轉成 JavaScript。
+
 ```bash
 $ npm install @wenyan/core
 $ npm install js-beautify
@@ -771,8 +771,3 @@ print(flag)
 ```
 
 **Flag: `AIS3{kn0ckKNOCKknock}`**
-
-
-
-
-
