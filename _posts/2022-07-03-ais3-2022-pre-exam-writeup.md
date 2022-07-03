@@ -18,31 +18,24 @@ title: AIS3 2022 Pre-exam Writeup
 ### Time Management
 
 1. 每次 print flag 的一個字元要等 30000 多秒。
-
 <img width="600" alt="time-management-sleep" src="https://user-images.githubusercontent.com/38059464/176660727-2e290e6f-0d5c-44c4-b296-f1fd0978461a.png">
 
 2. 從 `objdump` 找到要 patch 的 instruction 在 `0x122b`。
-
 <img width="600" alt="time-management-instruct" src="https://user-images.githubusercontent.com/38059464/176661153-ef3dc1bc-751e-480f-89d2-edeef8959421.png">
 
 3. 用 vim 打開 `chal`，然後輸入指令 `:%!xxd` 將 binary 轉成 `xxd` 的 hexdump 格式。
-
 <img width="527" alt="time-management-convert" src="https://user-images.githubusercontent.com/38059464/176663520-977eb575-f806-43b7-9df4-b87a9487ee95.png">
 
 4. 找到 `0x122b` 的位置即為要 patch 的部分 `0x00008763`。
-
 <img width="600" alt="time-management-before-patch" src="https://user-images.githubusercontent.com/38059464/176662170-71bd84e7-b3c9-475e-9d6d-20109f4dfbd1.png">
 
 5. 將其修改成 1 秒，同時也把右半部的 ASCII 改成 `.`。
-
 <img width="600" alt="time-management-after-patch" src="https://user-images.githubusercontent.com/38059464/176662667-939556fb-5fde-4703-a23c-8d10037923b2.png">
 
 6. 輸入指令 `:%!xxd -r` 將 hexdump revert 回 binary。
-
 <img width="600" alt="time-management-revert" src="https://user-images.githubusercontent.com/38059464/176663015-142c69ca-0ad9-4692-815a-d126cb9e6af2.png">
 
 7. 執行 patch 後的 binary 即可得到 flag，但因為最後會輸出 `\r`，因此要邊輸出邊按換行避免輸出被蓋掉。
-
 <img width="600" alt="time-management-flag" src="https://user-images.githubusercontent.com/38059464/176664787-295a4753-cfaa-4479-b3ce-7bd92ddad48c.png">
 
 **Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`**
@@ -50,7 +43,6 @@ title: AIS3 2022 Pre-exam Writeup
 ### Calculator
 
 1. 用 [`dnSpy`](https://github.com/dnSpy/dnSpy) 打開 `Extensions` 中的各個 `AIS3.dll`，可以看到多層對輸入的檢查。
-
 <img width="800" alt="calculator-check" src="https://user-images.githubusercontent.com/38059464/176863412-08014fae-f061-4acf-a1fa-2098ddffd515.png">
 
 2. 使用 `z3` 找出正確的輸入即為 flag，詳細 code 可以參考 `solve.py`。
@@ -80,7 +72,6 @@ title: AIS3 2022 Pre-exam Writeup
 ### 殼
 
 1. 如果有看過，應該會知道這是[文言](https://github.com/wenyan-lang/wenyan)，一種文言文程式語言。
-
 <img width="947" alt="wenyan-code" src="https://user-images.githubusercontent.com/38059464/176665877-d7ad91d9-6466-4fd4-b117-c9424b3b1ca2.png">
 
 2. 可以透過以下指令執行 `殼.wy` 和將其轉成 JavaScript。
