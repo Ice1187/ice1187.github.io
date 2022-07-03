@@ -9,6 +9,12 @@ toc_sticky: true
 title: AIS3 2022 Pre-exam Writeup
 
 ---
+從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。
+
+不得不說 AIS3 pre-exam 每年都有用心在出題目，相較 CTFTime 上常有些不明所以的 CTF，pre-exam 打起來都是很開心的。
+
+### Rank
+
 * Team: `Ice1187`
 * Ranking: 2nd
 
@@ -692,9 +698,10 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    except EOFError:
        pass
    ```
+
 <img width="800" alt="gift-in-the-dream-durations" src="https://user-images.githubusercontent.com/38059464/176882746-edc345bd-2ce1-4cbb-a0c3-4c33955ebbbd.png">
 
-2. 可以發現 `duration / 10` 皆在 ASCII 範圍內，因此把 `duration / 10` 組合起來即為 flag。
+1. 可以發現 `duration / 10` 皆在 ASCII 範圍內，因此把 `duration / 10` 組合起來即為 flag。
 
    ```python
    from PIL import Image
