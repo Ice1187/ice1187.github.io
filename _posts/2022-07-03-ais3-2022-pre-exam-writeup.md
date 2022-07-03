@@ -126,33 +126,33 @@ title: AIS3 2022 Pre-exam Writeup
 
 4. 用 `gdb` 追進去，看到 `Thread dubugging` 因此猜測可能有 call `fork` 或 `execve` 之類的 system call。用 `catch syscall` 在遇到 syscall 時中斷，發現其透過 `execve` 執行 `python`。
 
-  ```gdb
-  pwndbg> r
-  Starting program: /flag_checker
-  warning: Error disabling address space randomization: Operation not permitted
-  [Thread debugging using libthread_db enabled]
-  Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
-  ^C
-  Program received signal SIGINT, Interrupt.
-  pwndbg> ni
-  AIS3{AAAAAAAA}
-  pwndbg> catch syscall
-  Catchpoint 1 (any syscall)
-  pwndbg> c
-  Continuing.
+    ```gdb
+    pwndbg> r
+    Starting program: /flag_checker
+    warning: Error disabling address space randomization: Operation not permitted
+    [Thread debugging using libthread_db enabled]
+    Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+    ^C
+    Program received signal SIGINT, Interrupt.
+    pwndbg> ni
+    AIS3{AAAAAAAA}
+    pwndbg> catch syscall
+    Catchpoint 1 (any syscall)
+    pwndbg> c
+    Continuing.
 
-  Catchpoint 1 (call to syscall execve), 0x00005582a84281d0 in ?? ()
-  pwndbg> ni
-  ────────────────────────[ STACK ]────────────────────────
-  00:0000│ rsp 0x7fff7b088140 ◂— 0x4
-  01:0008│     0x7fff7b088148 —▸ 0x7fff7b0884dc ◂— 0x336e6f68747970 /* 'python3' */
-  02:0010│     0x7fff7b088150 —▸ 0x7fff7b0884e4 ◂— 0x706d695f5f00632d /* '-c' */
-  03:0018│     0x7fff7b088158 —▸ 0x7fff7b0884e7 ◂— 0x74726f706d695f5f ('__import')
-  04:0020│     0x7fff7b088160 —▸ 0x7fff7b0888fd ◂— 'AAAAAAAA}'
-  05:0028│     0x7fff7b088168 ◂— 0x0
-  06:0030│     0x7fff7b088170 —▸ 0x7fff7b088907 ◂— 'LESSOPEN=| /usr/bin/lesspipe %s'
-  07:0038│     0x7fff7b088178 —▸ 0x7fff7b088927 ◂— 'HOSTNAME=73648dfc4d1a'
-  ```
+    Catchpoint 1 (call to syscall execve), 0x00005582a84281d0 in ?? ()
+    pwndbg> ni
+    ────────────────────────[ STACK ]────────────────────────
+    00:0000│ rsp 0x7fff7b088140 ◂— 0x4
+    01:0008│     0x7fff7b088148 —▸ 0x7fff7b0884dc ◂— 0x336e6f68747970 /* 'python3' */
+    02:0010│     0x7fff7b088150 —▸ 0x7fff7b0884e4 ◂— 0x706d695f5f00632d /* '-c' */
+    03:0018│     0x7fff7b088158 —▸ 0x7fff7b0884e7 ◂— 0x74726f706d695f5f ('__import')
+    04:0020│     0x7fff7b088160 —▸ 0x7fff7b0888fd ◂— 'AAAAAAAA}'
+    05:0028│     0x7fff7b088168 ◂— 0x0
+    06:0030│     0x7fff7b088170 —▸ 0x7fff7b088907 ◂— 'LESSOPEN=| /usr/bin/lesspipe %s'
+    07:0038│     0x7fff7b088178 —▸ 0x7fff7b088927 ◂— 'HOSTNAME=73648dfc4d1a'
+    ```
 <img width="800" alt="flag-checker-see-python" src="https://user-images.githubusercontent.com/38059464/176689285-713021ea-b4e7-4ad7-b158-4c8d279bf6f8.png">
 
 5. 用 `dump` 把執行的 command 拉出來。
