@@ -35,3 +35,7 @@ For example, to install PyTorch `1.8.1` with CUDA toolkit `11.1`:
 ```bash
 pip install torch==1.8.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 ```
+
+### 後記
+
+把這篇文分享給 lab 的學長之後被狠狠打臉，原來 [PyTorch](https://pytorch.org/get-started/previous-versions/) 上就有標註每個 PyTorch 版本支援的 CUDA toolkit version...，我要去波蘭了 QQ
