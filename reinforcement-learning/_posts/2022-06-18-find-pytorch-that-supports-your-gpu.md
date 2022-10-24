@@ -1,4 +1,5 @@
 ---
+classes: wide
 categories: []
 tags:
 - pytorch
