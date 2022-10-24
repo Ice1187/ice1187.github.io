@@ -4,8 +4,8 @@ categories: []
 tags:
 - pytorch
 - cuda
-toc: true
-toc_sticky: true
+toc: false
+toc_sticky: false
 title: How to Find PyTorch that supports your GPU
 
 ---
