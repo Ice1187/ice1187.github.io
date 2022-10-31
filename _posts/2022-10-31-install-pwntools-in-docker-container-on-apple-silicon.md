@@ -12,7 +12,7 @@ title: Install pwntools in Docker Container on MacBook with Apple Silicon
 最近在準備 CTF 新手教學課程，在 setup CTF 環境的時候發現在 MacBook Air M2 的 Docker 上裝 [pwntools](https://github.com/Gallopsled/pwntools) 會一直報錯。花了一點時間找出怎麼解決，因此記錄一下。
 
 Error Message: 
-```pip
+```
 Building wheels for collected packages: capstone, intervaltree, psutil, unicorn, colored-traceback
   Building wheel for capstone (setup.py) ... done
   Created wheel for capstone: filename=capstone-5.0.0rc2-py3-none-manylinux1_aarch64.whl size=2719523 sha256=82083546cb406cebfde81a7e2194b80c07f5eadab70d03ab070c0ee3a1e754d2
