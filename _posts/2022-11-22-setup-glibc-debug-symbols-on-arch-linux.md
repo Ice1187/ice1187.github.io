@@ -1,6 +1,11 @@
 ---
 categories: []
-tags: []
+tags:
+- ctf
+- heap
+- debug-symbol
+- pwndbg
+- tool
 toc: false
 toc_sticky: false
 title: Setup Glibc Debug Symbols on Arch Linux
