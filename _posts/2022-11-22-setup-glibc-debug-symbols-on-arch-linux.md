@@ -21,10 +21,11 @@ ice1187@ice1187-arch heapmath$ cat ~/.bashrc
 export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
 ```
 3. 用 `gdb` 載入 binary，輸入 `set debuginfod enabled on`，再把程式跑起來，應該就會看到 glibc debug symbols，並且可以使用 `heap`、`bins` 等指令了。
-![pwndbg-bins.png](/assets/images/pwndbg-bins.png)
-![glibc-read-symbol.png](/assets/images/glibc-read-symbol.png)
+   ![glibc-read-symbol.png](/assets/images/glibc-read-symbol.png)
+   ![pwndbg-bins.png](/assets/images/pwndbg-bins.png)
 
 ### Reference
-- [nbulischeck/install-glibc-debug.sh | Gist](https://gist.github.com/nbulischeck/bda4397a59b77822703f98f6aeb2cb20?permalink_comment_id=4075383)
-- [Debuginfod | ArchWiki](https://wiki.archlinux.org/title/Debuginfod)
-- [Debuginfod service - Arch Linux](https://debuginfod.archlinux.org)
+
+* [nbulischeck/install-glibc-debug.sh | Gist](https://gist.github.com/nbulischeck/bda4397a59b77822703f98f6aeb2cb20?permalink_comment_id=4075383)
+* [Debuginfod | ArchWiki](https://wiki.archlinux.org/title/Debuginfod)
+* [Debuginfod service - Arch Linux](https://debuginfod.archlinux.org)
