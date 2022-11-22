@@ -14,14 +14,12 @@ ice1187@ice1187-arch heapmath$ cat ~/.gdbinit
 source /usr/share/pwndbg/gdbinit.py
 set debuginfod enabled ask
 ```
-
 2. 設定 env variable `DEBUGINFOD_URLS="https://debuginfod.archlinux.org"`，我是放在 `~/.bashrc` 裡。
 ```bash
 ice1187@ice1187-arch heapmath$ cat ~/.bashrc
 ...
 export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
 ```
-
 3. 用 `gdb` 載入 binary，輸入 `set debuginfod enabled on`，再把程式跑起來，應該就會看到 glibc debug symbols，並且可以使用 `heap`、`bins` 等指令了。
 
 ![pwndbg-bins.png](/assets/images/pwndbg-bins.png)
