@@ -44,7 +44,7 @@ C:\> debugbox POLYGLOT.COM
 
 ![](/assets/images/dosbox-x-debugger.png)
 
-4. 剩下就是一般 debug 操作，一些常用指令如下，更多指令可以輸入 `help`：
+4. 剩下就是一般 debug 操作，一些常用指令如下，更多指令可以參考 [dosbox-x/README.debugger](https://github.com/joncampbell123/dosbox-x/blob/master/README.debugger)：
 
 Command | Description
 --------|-------------
