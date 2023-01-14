@@ -118,7 +118,7 @@ author:
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
     - label: "CTFTime"
-      icon: "fab fa-fw fa-flag-swallowtail"
+      icon: "fa fa-fw fa-flag"
       url: "https://ctftime.org/team/155614"
       
 
