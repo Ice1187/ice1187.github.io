@@ -4,6 +4,8 @@ main:
   #  url: /quick-start-guide/
   #- title: "About"
   #  url: /about/
+  - title: "Knowledge Base"
+    url: "https://ice1187.notion.site/Hacker-Path-d8acb28b51fb4fd8bda4f05839e285c9"
   - title: "HTB"
     url: /hackthebox/
   - title: "RL"
