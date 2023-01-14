@@ -117,6 +117,10 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
+    - label: "CTFTime"
+      icon: "fab fa-fw fa-flag-swallowtail"
+      url: "https://ctftime.org/team/155614"
+      
 
 # Site Footer
 footer:
