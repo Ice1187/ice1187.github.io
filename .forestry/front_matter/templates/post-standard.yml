@@ -26,4 +26,5 @@ pages:
 - _posts/2022-07-03-ais3-2022-pre-exam-writeup.md
 - _posts/2022-10-31-install-pwntools-in-docker-container-on-apple-silicon.md
 - _posts/2022-11-22-setup-glibc-debug-symbols-on-arch-linux.md
+- _posts/ais3-eof-2023-qual-edu-ctf-final-writeup.md
 - reinforcement-learning/_posts/2022-06-18-find-pytorch-that-supports-your-gpu.md
