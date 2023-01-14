@@ -143,7 +143,9 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url:
-
+    - label: "CTFTime"
+      icon: "fa fa-fw fa-flag"
+      url: "https://ctftime.org/team/155614"
 
 # Reading Files
 include:
