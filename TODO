@@ -1,0 +1,9 @@
+0. Planning on what should be shown on the header menubar.
+1. Change _data/navigation.yml to setup homepage collections
+  - ref: https://github.com/mmistakes/minimal-mistakes/blob/master/docs/_data/navigation.yml
+2. Choose layout
+  - https://github.com/mmistakes/minimal-mistakes/tree/master/_layouts
+3. Adding snippets
+  - add Image snippet
+4. Just some cool filter
+  - https://jekyllrb.com/docs/liquid/filters/
