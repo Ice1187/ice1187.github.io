@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Build TinaCMS
+      env:
+        CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+        TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+      run: npx @tinacms/cli@latest build
     - uses: actions/checkout@v3
     - uses: actions/cache@v3
       with:
@@ -17,11 +22,6 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
         restore-keys: |
           ${{ runner.os }}-gems-
-    - name: Build TinaCMS
-      env:
-        CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
-        TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
-      run: npx @tinacms/cli@latest build
     - name: Jekyll Actions
       uses: helaili/jekyll-action@2.3.1
       with:
