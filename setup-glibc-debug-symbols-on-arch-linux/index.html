@@ -1,0 +1,644 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Setup Glibc Debug Symbols on Arch Linux | Ice1187’s Blog</title>
+<meta name="description" content="最近修交大程安遇到 heap 題，記錄一下怎麼在 Arch Linux 上取得 glibc debug symbols，方便用 pwndbg 的 heap, bins 等指令。">
+
+
+  <meta name="author" content="Ice1187">
+  
+  <meta property="article:author" content="Ice1187">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ice1187's Blog">
+<meta property="og:title" content="Setup Glibc Debug Symbols on Arch Linux">
+<meta property="og:url" content="https://ice1187.github.io/setup-glibc-debug-symbols-on-arch-linux/">
+
+
+  <meta property="og:description" content="最近修交大程安遇到 heap 題，記錄一下怎麼在 Arch Linux 上取得 glibc debug symbols，方便用 pwndbg 的 heap, bins 等指令。">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-11-22T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://ice1187.github.io/setup-glibc-debug-symbols-on-arch-linux/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Ice1187",
+      "url": "https://ice1187.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Ice1187's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://ice1187.notion.site/Hacker-Path-d8acb28b51fb4fd8bda4f05839e285c9">Knowledge Base</a>
+            </li><li class="masthead__menu-item">
+              <a href="/hackthebox/">HTB</a>
+            </li><li class="masthead__menu-item">
+              <a href="/rl/">RL</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar.jpeg" alt="Ice1187" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Ice1187</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>A CS student/CTF player interested in Security.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ice1187" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://ctftime.org/team/155614" rel="nofollow noopener noreferrer"><i class="fa fa-fw fa-flag" aria-hidden="true"></i><span class="label">CTFTime</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Setup Glibc Debug Symbols on Arch Linux">
+    <meta itemprop="description" content="最近修交大程安遇到 heap 題，記錄一下怎麼在 Arch Linux 上取得 glibc debug symbols，方便用 pwndbg 的 heap, bins 等指令。">
+    <meta itemprop="datePublished" content="2022-11-22T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Setup Glibc Debug Symbols on Arch Linux
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-11-22T00:00:00+00:00">November 22, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>最近修交大程安遇到 heap 題，記錄一下怎麼在 Arch Linux 上取得 glibc debug symbols，方便用 <code class="language-plaintext highlighter-rouge">pwndbg</code> 的 <code class="language-plaintext highlighter-rouge">heap</code>, <code class="language-plaintext highlighter-rouge">bins</code> 等指令。</p>
+
+<ol>
+  <li>在 <code class="language-plaintext highlighter-rouge">~/.gdbinit</code> 中加入 <code class="language-plaintext highlighter-rouge">set debuginfod enabled ask</code>。可以設定 <code class="language-plaintext highlighter-rouge">on/off/ask</code>， <code class="language-plaintext highlighter-rouge">ask</code> 的好處在於打開 gdb 時，它會跳出 <code class="language-plaintext highlighter-rouge">Debuginfod has been disabled.</code> 的提示訊息，手動輸入 <code class="language-plaintext highlighter-rouge">set debuginfod enabled on</code> 之後才會載入 debug symbols。
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>ice1187@ice1187-arch heapmath<span class="nv">$ </span><span class="nb">cat</span> ~/.gdbinit
+<span class="nb">source</span> /usr/share/pwndbg/gdbinit.py
+<span class="nb">set </span>debuginfod enabled ask
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>設定 env variable <code class="language-plaintext highlighter-rouge">DEBUGINFOD_URLS="https://debuginfod.archlinux.org"</code>，我是放在 <code class="language-plaintext highlighter-rouge">~/.bashrc</code> 裡。
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>ice1187@ice1187-arch heapmath<span class="nv">$ </span><span class="nb">cat</span> ~/.bashrc
+...
+<span class="nb">export </span><span class="nv">DEBUGINFOD_URLS</span><span class="o">=</span><span class="s2">"https://debuginfod.archlinux.org"</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>用 <code class="language-plaintext highlighter-rouge">gdb</code> 載入 binary，輸入 <code class="language-plaintext highlighter-rouge">set debuginfod enabled on</code>，再把程式跑起來，應該就會看到 glibc debug symbols，並且可以使用 <code class="language-plaintext highlighter-rouge">heap</code>、<code class="language-plaintext highlighter-rouge">bins</code> 等指令了。
+<img src="/assets/images/glibc-read-symbol.png" alt="glibc-read-symbol.png" /></p>
+
+    <p><img src="/assets/images/pwndbg-bins.png" alt="pwndbg-bins.png" /></p>
+  </li>
+</ol>
+
+<h3 id="reference">Reference</h3>
+
+<ul>
+  <li><a href="https://gist.github.com/nbulischeck/bda4397a59b77822703f98f6aeb2cb20?permalink_comment_id=4075383">nbulischeck/install-glibc-debug.sh - Gist</a></li>
+  <li><a href="https://wiki.archlinux.org/title/Debuginfod">Debuginfod - ArchWiki</a></li>
+  <li><a href="https://debuginfod.archlinux.org">Debuginfod service - Arch Linux</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#ctf" class="page__taxonomy-item" rel="tag">ctf</a><span class="sep">, </span>
+    
+      <a href="/tags/#debug-symbol" class="page__taxonomy-item" rel="tag">debug-symbol</a><span class="sep">, </span>
+    
+      <a href="/tags/#heap" class="page__taxonomy-item" rel="tag">heap</a><span class="sep">, </span>
+    
+      <a href="/tags/#pwndbg" class="page__taxonomy-item" rel="tag">pwndbg</a><span class="sep">, </span>
+    
+      <a href="/tags/#tool" class="page__taxonomy-item" rel="tag">tool</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-11-22T00:00:00+00:00">November 22, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Setup+Glibc+Debug+Symbols+on+Arch+Linux%20https%3A%2F%2Fice1187.github.io%2Fsetup-glibc-debug-symbols-on-arch-linux%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fice1187.github.io%2Fsetup-glibc-debug-symbols-on-arch-linux%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fice1187.github.io%2Fsetup-glibc-debug-symbols-on-arch-linux%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/install-pwntools-in-docker-container-on-apple-silicon/" class="pagination--pager" title="Install pwntools in Docker Container on MacBook with Apple Silicon
+">Previous</a>
+    
+    
+      <a href="/ais3-eof-2023-qual-edu-ctf-final-writeup/" class="pagination--pager" title="AIS3 EOF 2023 Qual / EDU-CTF Final Writeup
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/dos-executable-com-file-format/" rel="permalink">How to Debug DOS Executable (COM) file
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-01-14T00:00:00+00:00">January 14, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">最近解 CTF 遇到一題 COM file 執行檔的題目，花了一些時間找到如何 debug COM file。雖然題目沒解出來，但還是記錄一下。
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ais3-eof-2023-qual-edu-ctf-final-writeup/" rel="permalink">AIS3 EOF 2023 Qual / EDU-CTF Final Writeup
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-01-14T00:00:00+00:00">January 14, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">撞課撞了三年，大四上才終於有機會修交大程安，而程安期末剛好就是打 EOF 初賽。今年初賽 reverse 破台，算是有達到 pre-exam 後立下的期待，但決賽剛好撞到 SECCON，所以沒辦法打 QQ。
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/install-pwntools-in-docker-container-on-apple-silicon/" rel="permalink">Install pwntools in Docker Container on MacBook with Apple Silicon
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-31T00:00:00+00:00">October 31, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">最近在準備 CTF 新手教學課程，在 setup CTF 環境的時候發現在 MacBook Air M2 的 Docker 上裝 pwntools 會一直報錯。花了一點時間找出怎麼解決，因此記錄一下。
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ais3-2022-pre-exam-writeup/" rel="permalink">AIS3 2022 Pre-exam Writeup
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-07-03T00:00:00+00:00">July 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/ice1187" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://ctftime.org/team/155614" rel="nofollow noopener noreferrer"><i class="fa fa-fw fa-flag" aria-hidden="true"></i> CTFTime</a></li>
+        
+      
+    
+
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Ice1187. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

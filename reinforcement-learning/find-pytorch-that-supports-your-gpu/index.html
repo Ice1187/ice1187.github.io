@@ -1,0 +1,654 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>How to Find PyTorch that supports your GPU | Ice1187’s Blog</title>
+<meta name="description" content="If PyTorch shows the following messages, then it means your PyTorch doesn’t compile with a CUDA version compatible with your GPU.">
+
+
+  <meta name="author" content="Ice1187">
+  
+  <meta property="article:author" content="Ice1187">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Ice1187's Blog">
+<meta property="og:title" content="How to Find PyTorch that supports your GPU">
+<meta property="og:url" content="https://ice1187.github.io/reinforcement-learning/find-pytorch-that-supports-your-gpu/">
+
+
+  <meta property="og:description" content="If PyTorch shows the following messages, then it means your PyTorch doesn’t compile with a CUDA version compatible with your GPU.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-06-18T00:00:00+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://ice1187.github.io/reinforcement-learning/find-pytorch-that-supports-your-gpu/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Ice1187",
+      "url": "https://ice1187.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Ice1187's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="https://ice1187.notion.site/Hacker-Path-d8acb28b51fb4fd8bda4f05839e285c9">Knowledge Base</a>
+            </li><li class="masthead__menu-item">
+              <a href="/hackthebox/">HTB</a>
+            </li><li class="masthead__menu-item">
+              <a href="/rl/">RL</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/avatar.jpeg" alt="Ice1187" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Ice1187</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>A CS student/CTF player interested in Security.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/ice1187" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://ctftime.org/team/155614" rel="nofollow noopener noreferrer"><i class="fa fa-fw fa-flag" aria-hidden="true"></i><span class="label">CTFTime</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How to Find PyTorch that supports your GPU">
+    <meta itemprop="description" content="If PyTorch shows the following messages, then it means your PyTorch doesn’t compile with a CUDA version compatible with your GPU.">
+    <meta itemprop="datePublished" content="2022-06-18T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">How to Find PyTorch that supports your GPU
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-18T00:00:00+00:00">June 18, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>If PyTorch shows the following messages, then it means your PyTorch doesn’t compile with a CUDA version compatible with your GPU.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>UserWarning: GeForce RTX 3090 with CUDA capability sm_86 is not compatible with the current PyTorch installation. The current PyTorch install supports CUDA capabilities ...
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>To addrees the problem:</p>
+
+<ol>
+  <li>Go to <a href="https://developer.nvidia.com/cuda-gpus">CUDA GPUs - Compute Capability</a>.</li>
+  <li>Open the section the GPU might be in, e.g., <code class="language-plaintext highlighter-rouge">GeForce RTX 3090</code> is in “CUDA-Enabled GeForce and TITAN Products”.</li>
+  <li>Find the “Compute Capability” of the GPU, e.g., <code class="language-plaintext highlighter-rouge">GeForce RTX 3090</code> has the value <code class="language-plaintext highlighter-rouge">8.6</code>.</li>
+  <li>Go to <a href="https://docs.nvidia.com/deploy/cuda-compatibility/index.html#faq__docs-internal-guid-d9200e15-7fff-2037-c3ce-62bfbccf325e">CUDA Compatibility – FAQ -&gt; Which GPUs are supported by the driver?</a>, then find the driver version that supports the “Compute Capability” of the GPU, e.g., the lowest driver version supports <code class="language-plaintext highlighter-rouge">GeForce RTX 3090</code> is <code class="language-plaintext highlighter-rouge">450.36.06+</code>.
+<img src="/assets/images/gpu-driver.png" alt="GPU vs driver" width="800" /></li>
+  <li>Go to <a href="https://docs.nvidia.com/deploy/cuda-compatibility/index.html#use-the-right-compat-package__table-cuda-application-support-matrix">CUDA Application Compatibility Support Matrix</a> table on the same page, and find the CUDA toolkit version that supports the corresponding driver version, e.g., the lowest CUDA toolkit version for <code class="language-plaintext highlighter-rouge">GeForce RTX 3090</code>, driver <code class="language-plaintext highlighter-rouge">450.36.06+</code>, is <code class="language-plaintext highlighter-rouge">11.0</code>.
+<img src="/assets/images/cuda-compatibility-support-matrix.png" alt="CUDA Application Compatibility Support Matrix" width="800" /></li>
+  <li>After found out the Compute Capability and CUDA toolkit version for the GPU, go to <a href="https://download.pytorch.org/whl/torch_stable.html">PyTorch Stable Wheel</a>. Every wheel with <code class="language-plaintext highlighter-rouge">cuXXX</code> where <code class="language-plaintext highlighter-rouge">XXX</code> is at least as large as the needed CUDA toolkit version should be usable, e.g., the minimum PyTorch version that supports <code class="language-plaintext highlighter-rouge">GeForce RTX 3090</code> should be <code class="language-plaintext highlighter-rouge">torch-1.7.0</code>, since it’s the first one to starts with <code class="language-plaintext highlighter-rouge">cu110</code>, which means CUDA toolkit <code class="language-plaintext highlighter-rouge">11.0</code>.</li>
+  <li>Finally, install the PyTorch with the CUDA toolkit version needed with:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pip <span class="nb">install </span><span class="nv">torch</span><span class="o">==</span>&lt;torch.version&gt;+cu&lt;XXX&gt; <span class="nt">-f</span> https://download.pytorch.org/whl/torch_stable.html
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>For example, to install PyTorch <code class="language-plaintext highlighter-rouge">1.8.1</code> with CUDA toolkit <code class="language-plaintext highlighter-rouge">11.1</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pip <span class="nb">install </span><span class="nv">torch</span><span class="o">==</span>1.8.1+cu111 <span class="nt">-f</span> https://download.pytorch.org/whl/torch_stable.html
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="後記">後記</h3>
+
+<p>把這篇文分享給 lab 的學長之後被狠狠打臉，原來 <a href="https://pytorch.org/get-started/previous-versions/">PyTorch</a> 上就有標註每個 PyTorch 版本支援的 CUDA toolkit version…，我要去波蘭了 QQ</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cuda" class="page__taxonomy-item" rel="tag">cuda</a><span class="sep">, </span>
+    
+      <a href="/tags/#pytorch" class="page__taxonomy-item" rel="tag">pytorch</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#reinforcement-learning" class="page__taxonomy-item" rel="tag">reinforcement-learning</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-06-18T00:00:00+00:00">June 18, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=How+to+Find+PyTorch+that+supports+your+GPU%20https%3A%2F%2Fice1187.github.io%2Freinforcement-learning%2Ffind-pytorch-that-supports-your-gpu%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fice1187.github.io%2Freinforcement-learning%2Ffind-pytorch-that-supports-your-gpu%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fice1187.github.io%2Freinforcement-learning%2Ffind-pytorch-that-supports-your-gpu%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/google-meet/" class="pagination--pager" title="調整 Google Meet 音量
+">Previous</a>
+    
+    
+      <a href="/ais3-2022-pre-exam-writeup/" class="pagination--pager" title="AIS3 2022 Pre-exam Writeup
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/dos-executable-com-file-format/" rel="permalink">How to Debug DOS Executable (COM) file
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-01-14T00:00:00+00:00">January 14, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">最近解 CTF 遇到一題 COM file 執行檔的題目，花了一些時間找到如何 debug COM file。雖然題目沒解出來，但還是記錄一下。
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ais3-eof-2023-qual-edu-ctf-final-writeup/" rel="permalink">AIS3 EOF 2023 Qual / EDU-CTF Final Writeup
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2023-01-14T00:00:00+00:00">January 14, 2023</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">撞課撞了三年，大四上才終於有機會修交大程安，而程安期末剛好就是打 EOF 初賽。今年初賽 reverse 破台，算是有達到 pre-exam 後立下的期待，但決賽剛好撞到 SECCON，所以沒辦法打 QQ。
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/setup-glibc-debug-symbols-on-arch-linux/" rel="permalink">Setup Glibc Debug Symbols on Arch Linux
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-11-22T00:00:00+00:00">November 22, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">最近修交大程安遇到 heap 題，記錄一下怎麼在 Arch Linux 上取得 glibc debug symbols，方便用 pwndbg 的 heap, bins 等指令。
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/install-pwntools-in-docker-container-on-apple-silicon/" rel="permalink">Install pwntools in Docker Container on MacBook with Apple Silicon
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-31T00:00:00+00:00">October 31, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">最近在準備 CTF 新手教學課程，在 setup CTF 環境的時候發現在 MacBook Air M2 的 Docker 上裝 pwntools 會一直報錯。花了一點時間找出怎麼解決，因此記錄一下。
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/ice1187" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://ctftime.org/team/155614" rel="nofollow noopener noreferrer"><i class="fa fa-fw fa-flag" aria-hidden="true"></i> CTFTime</a></li>
+        
+      
+    
+
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Ice1187. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
