@@ -8,7 +8,23 @@ tags:
 toc: true
 toc_sticky: true
 title: AIS3 2022 Pre-exam Writeup
+_template: post_standard
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 從 226 名、49 名，一直到今年的第 2 名，著實感受到自己的進步，雖然也有一部分是因為跟我差不多時期的人可能都去出題了，所以競爭沒有往年激烈。不過還是很高興可以看見從上大學到現在有一點一點地在進步，期許畢業前可以在 EOF 上也有更好的 solo 成績。
 

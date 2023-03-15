@@ -1,14 +1,29 @@
 ---
 categories: []
 tags:
-- pwntools
-- ctf
-- tool
+  - pwntools
+  - ctf
+  - tool
 toc: false
 toc_sticky: false
 title: Install pwntools in Docker Container on MacBook with Apple Silicon
-
+_template: post_standard
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 最近在準備 CTF 新手教學課程，在 setup CTF 環境的時候發現在 MacBook Air M2 的 Docker 上裝 [pwntools](https://github.com/Gallopsled/pwntools) 會一直報錯。花了一點時間找出怎麼解決，因此記錄一下。
 
 Error Message: 

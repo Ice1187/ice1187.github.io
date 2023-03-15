@@ -1,0 +1,24 @@
+{
+  "name": "ice1187.github.io",
+  "version": "1.0.0",
+  "description": "![Minimal Mistakes Jekyll Theme](assets/images/mm-layout-splash.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ice1187/ice1187.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ice1187/ice1187.github.io/issues"
+  },
+  "homepage": "https://github.com/Ice1187/ice1187.github.io#readme",
+  "dependencies": {
+    "@tinacms/cli": "^1.3.2",
+    "tinacms": "^1.3.2"
+  }
+}

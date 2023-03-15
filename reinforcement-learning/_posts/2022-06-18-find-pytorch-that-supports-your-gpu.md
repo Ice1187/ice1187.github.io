@@ -2,13 +2,28 @@
 classes: wide
 categories: []
 tags:
-- pytorch
-- cuda
+  - pytorch
+  - cuda
 toc: false
 toc_sticky: false
 title: How to Find PyTorch that supports your GPU
-
+_template: post_standard
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 If PyTorch shows the following messages, then it means your PyTorch doesn't compile with a CUDA version compatible with your GPU.
 
     UserWarning: GeForce RTX 3090 with CUDA capability sm_86 is not compatible with the current PyTorch installation. The current PyTorch install supports CUDA capabilities ...
