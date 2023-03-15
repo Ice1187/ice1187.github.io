@@ -17,6 +17,11 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
         restore-keys: |
           ${{ runner.os }}-gems-
+    - name: Build TinaCMS
+      env:
+        CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+        TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+      run: ${{ steps.detect-package-manager.outputs.runner }} tinacms build
     - name: Jekyll Actions
       uses: helaili/jekyll-action@2.3.1
       with:
