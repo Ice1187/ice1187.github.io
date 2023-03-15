@@ -15,7 +15,7 @@ jobs:
       env:
         TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
         TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
-      run: npm install --save-dev @tinacms/cli && npx tinacms build
+      run: npm install --save-dev @tinacms/cli && TINA_PUBLIC_CLIENT_ID=${{ secrets.TINA_PUBLIC_CLIENT_ID }} TINA_TOKEN=${{ secrets.TINA_TOKEN }} npx tinacms build
     - uses: actions/cache@v3
       with:
         path: vendor/bundle
