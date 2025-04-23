@@ -61,8 +61,7 @@ Summarize the key points from your post and consider adding a call to action or 
 
 ## References
 
-- [Reference 1](https://example.com)
-- [Reference 2](https://example.com)
+- [Minimal Mistakes Cheat Sheet](https://www.fabriziomusacchio.com/blog/2021-08-11-Minimal_Mistakes_Cheat_Sheet)
 
 ---
 
