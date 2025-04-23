@@ -1,11 +1,13 @@
 main:
   #- title: "Posts"
   #  url: /posts/
+  - title: "近期閱讀"
+    url: /recently-digest/
+  - title: "專案"
+    url: /projects/
   - title: "分類"
     url: /categories/
   #- title: "Tags"
   #  url: /tags/
-  - title: "近期閱讀"
-    url: /recently-digest/
   - title: "關於"
     url: /about/
