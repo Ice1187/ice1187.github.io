@@ -1,12 +1,14 @@
 ---
 categories:
-  - ctf
+  - CTF
 tags:
   - COM
   - ctf
 toc: true
 toc_sticky: true
 title: How to Debug DOS Executable (COM) file
+header:
+  teaser: /assets/images/dosbox-x-mount.png
 ---
 
 最近解 CTF 遇到一題 COM file 執行檔的題目，花了一些時間找到如何 debug COM file。雖然題目沒解出來，但還是記錄一下。

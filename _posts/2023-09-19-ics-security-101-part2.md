@@ -10,7 +10,8 @@ tags:
 # toc: true # enable if the content has multiple sections
 # toc_sticky: true # enable if the content has multiple sections
 # classes: wide # enable if some image are wide
-# header: # header images
+header:
+  teaser: /assets/images/purdue-model.png
 #   image: /assets/images/blogging-idea.png
 #   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---

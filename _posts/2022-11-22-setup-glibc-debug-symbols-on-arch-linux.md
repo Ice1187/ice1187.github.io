@@ -1,6 +1,6 @@
 ---
 categories:
-  - ctf
+  - CTF
 tags:
   - ctf
   - heap
@@ -10,7 +10,6 @@ tags:
 toc: false
 toc_sticky: false
 title: Setup Glibc Debug Symbols on Arch Linux
-_template: post_standard
 ---
 
 最近修交大程安遇到 heap 題，記錄一下怎麼在 Arch Linux 上取得 glibc debug symbols，方便用 `pwndbg` 的 `heap`, `bins` 等指令。

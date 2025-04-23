@@ -22,7 +22,15 @@
             </li>
           {%- endfor -%}
         </ul>
+        {% if site.search == true %}
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
+          <i class="fas fa-search"></i>
+        </button>
+        {% endif %}
         {% if site.minimal_mistakes_skin_dark %}
+        <div>
+          <span class="visually-hidden">{{ "Toggle dark mode" }}</span>
           <i class="fas fa-fw fa-sun"
              aria-hidden="true"
              onclick="
@@ -40,12 +48,7 @@
                return false;
              "
           ></i>
-        {% endif %}
-        {% if site.search == true %}
-        <button class="search__toggle" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
-          <i class="fas fa-search"></i>
-        </button>
+        </div>
         {% endif %}
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>

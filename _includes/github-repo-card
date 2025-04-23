@@ -1,0 +1,130 @@
+<!-- _includes/github-repo-card.html -->
+{% assign owner = include.owner %}
+{% assign repo_name = include.repo %}
+{% assign repo_id = owner | append: '/' | append: repo_name %}
+{% assign card_id = 'github-repo-' | append: owner | append: '-' | append: repo_name %}
+
+<div id="{{ card_id }}" class="github-repo-card"></div>
+
+<style>
+.github-repo-card {
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  margin: 20px 0;
+  background-color: #fff;
+  color: #24292e;
+}
+
+.github-repo-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.github-repo-description {
+  color: #586069;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.github-repo-meta {
+  display: flex;
+  font-size: 12px;
+  color: #586069;
+}
+
+.github-repo-language, .github-repo-stars, .github-repo-forks {
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.github-repo-language-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.github-repo-card[data-theme="dark"] {
+  background-color: #2d2d2d;
+  border-color: #4a4a4a;
+  color: #e6e6e6;
+}
+
+.github-repo-card[data-theme="dark"] .github-repo-description,
+.github-repo-card[data-theme="dark"] .github-repo-meta {
+  color: #b3b3b3;
+}
+</style>
+
+<script>
+(function() {
+  const container = document.getElementById("{{ card_id }}");
+  
+  // Fetch repository data
+  fetch(`https://api.github.com/repos/{{ repo_id }}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.message && data.message.includes('Not Found')) {
+        container.innerHTML = `<div>Repository {{ repo_id }} not found</div>`;
+        return;
+      }
+      
+      // Simplified language color detection
+      let langColor = '#ddd';
+      if (data.language) {
+        // Common language colors
+        const colors = {
+          'JavaScript': '#f1e05a', 'Python': '#3572A5', 'HTML': '#e34c26',
+          'CSS': '#563d7c', 'Ruby': '#701516', 'Java': '#b07219',
+          'TypeScript': '#2b7489', 'Go': '#00ADD8', 'C++': '#f34b7d'
+        };
+        langColor = colors[data.language] || '#ddd';
+      }
+      
+      container.innerHTML = `
+        <div class="github-repo-title">
+          <a href="${data.html_url}" target="_blank">${data.owner.login}/${data.name}</a>
+        </div>
+        <div class="github-repo-description">${data.description || ''}</div>
+        <div class="github-repo-meta">
+          <div class="github-repo-stars">
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
+              <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+            </svg>
+            ${data.stargazers_count}
+          </div>
+          <div class="github-repo-forks">
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16">
+              <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
+            </svg>
+            ${data.forks_count}
+          </div>
+          ${data.language ? `
+            <div class="github-repo-language">
+              <span class="github-repo-language-icon" style="background-color: ${langColor}"></span>
+              ${data.language}
+            </div>
+          ` : ''}
+        </div>
+      `;
+      
+      // Apply theme based on session storage
+      const theme = sessionStorage.getItem('theme') || 'light';
+      container.setAttribute('data-theme', theme);
+      
+      // Listen for theme changes
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'theme') {
+          container.setAttribute('data-theme', e.newValue);
+        }
+      });
+    })
+    .catch(error => {
+      container.innerHTML = `<div>Error loading repository data</div>`;
+      console.error(`Error fetching repo {{ repo_id }}:`, error);
+    });
+})();
+</script>

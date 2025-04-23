@@ -10,9 +10,10 @@ tags:
 # toc: true # enable if the content has multiple sections
 # toc_sticky: true # enable if the content has multiple sections
 # classes: wide # enable if some image are wide
-# header: # header images
-#   image: /assets/images/blogging-idea.png
-#   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
+header:
+  teaser: /assets/images/hell-of-infinite-scroll.png
+  #   image: /assets/images/blogging-idea.png
+  #   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
 
 今天想說很久沒看 FB 了，打開來滑一下，結果就滑了 40 分鐘，而且帶著焦慮和 overwhelmed 離開。感謝自己只待了 40 分鐘就主動掙脫。

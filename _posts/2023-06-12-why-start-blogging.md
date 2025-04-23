@@ -10,12 +10,16 @@ tags:
 toc: true # enable if the content has multiple sections
 # toc_sticky: true # enable (default) if the content has multiple sections
 # classes: wide # enable if some image are wide
+header:
+  teaser: /assets/images/blogging-idea.png
 ---
 
 今天是開始寫部落格的第一天。上大學後，已經有很長一段時間沒有認真寫字了。除了低潮時偶爾寫寫日記，幫助自己理清思緒和記錄成長以外，幾乎不曾寫字。因此，決定先來記錄一下自己為什麼開始寫部落格。
 
 {% include figure popup=true
-   image_path="/assets/images/blogging-idea.png" alt="blogging ideas" caption="我開始寫部落格的一些規劃、小筆記，和未來預計要寫的東西。"
+   image_path="/assets/images/blogging-idea.png"
+   alt="blogging ideas"
+   caption="我開始寫部落格的一些規劃、小筆記，和未來預計要寫的東西。"
 %}
 
 ## 為什麼開始寫部落格？

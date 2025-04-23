@@ -11,6 +11,8 @@ excerpt: "今天在聽不好意思請問一下的我們來處理一些南京沒�
 # toc: true # enable if the content has multiple sections
 # toc_sticky: true # enable if the content has multiple sections
 # classes: wide # enable if some image are wide
+header:
+  teaser: /assets/images/excuse-me-please.png
 ---
 
 ![the image of the podcast](/assets/images/excuse-me-please.png){: .align-center}

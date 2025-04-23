@@ -11,8 +11,10 @@ tags:
 # toc: true # enable if the content has multiple sections
 # toc_sticky: true # enable if the content has multiple sections
 # classes: wide # enable if some image are wide
-# header: # header images
-#   image: /assets/images/blogging-idea.png
+# last_modified_at: YYYY-MM-DD
+# header:
+#   teaser: /assets/images/hell-of-infinite-scroll.png # teaser in related
+#   image: /assets/images/blogging-idea.png # header images
 #   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
 

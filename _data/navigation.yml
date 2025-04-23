@@ -1,9 +1,11 @@
 main:
   #- title: "Posts"
   #  url: /posts/
-  - title: "Categories"
+  - title: "分類"
     url: /categories/
   #- title: "Tags"
   #  url: /tags/
-  - title: "About"
+  - title: "近期閱讀"
+    url: /recently-digest/
+  - title: "關於"
     url: /about/
