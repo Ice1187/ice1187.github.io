@@ -91,8 +91,8 @@ Balsn CTF 2023 | Infra、驗題
 HITCON Defense 2021 教育場 | 題目設計
 
 ## Other Experiences
-- 台灣大學 網路安全實務與社會課程 - 助教 (2024/09 - 2024/12)
-  - aka 國家資通安全研究院 台灣資安計劃 - 資安輔導員
+- 國家資通安全研究院 NICS 台灣資安計劃 - 資安輔導員 (2024/09 - 2024/12)
+  - aka 台灣大學 網路安全實務與社會課程 - 助教
 - 開源貢獻
   - [LuLu MacOS 防火牆中文化翻譯](https://github.com/objective-see/LuLu/releases/tag/v3.1.3)
 - HITCON 2024 - 活動組成員 (2024/05 - 2024/08)

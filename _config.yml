@@ -115,7 +115,7 @@ analytics:
 # Site Author
 author:
   name             : "Ice1187"
-  avatar           : "/assets/images/bio-photo.jpg" # path of avatar image, e.g.
+  avatar           : "/assets/images/my-avatar.jpeg" # path of avatar image, e.g.
   bio              : "Generally interested in fundamental stuff, both in computer and human."
   location         : "Taiwan"
   email            : "hi [at] ice1187.com"

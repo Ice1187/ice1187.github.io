@@ -1,0 +1,17 @@
+services:
+  blog:
+    image: jekyll/jekyll:latest
+    command: sh -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --livereload"
+    ports:
+      - "127.0.0.1:4000:4000"
+    volumes:
+      - ./:/srv/jekyll
+      - blog_bundle:/usr/local/bundle
+    environment:
+      - JEKYLL_ENV=development
+
+# This particular mapping is used to persist the Ruby gems that Jekyll needs.
+# By mapping this directory to ./vendor/bundle on your host:
+# You don't need to re-download and reinstall all gems every time you start the container
+volumes:
+  blog_bundle:
