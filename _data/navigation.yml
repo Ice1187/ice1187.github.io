@@ -1,8 +1,8 @@
 main:
   #- title: "Posts"
   #  url: /posts/
-  - title: "閱讀"
-    url: /digest/
+  - title: "輸入"
+    url: /intake/
   - title: "專案"
     url: /projects/
   - title: "分類"
