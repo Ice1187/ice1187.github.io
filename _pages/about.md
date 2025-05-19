@@ -14,18 +14,17 @@ In my free time, I like to read comics, play video games, and read books. You ca
 
 ## Work Experience
 
-**兼職資安研究員** \| 奧義智慧科技 \| *2024/02 - present*
-- 公開研究詳見 [Speaking & Teaching](#speaking--teaching)
+**兼職資安研究員** -- 奧義智慧科技 \| *2024/02 - present*<br />
+進行資安研究，公開研究詳見 [Speaking & Teaching](#speaking--teaching)。
 
-**資安研究實習生** \| 奧義智慧科技 \| *2020/10 - 2024/02*
+**資安研究實習生** -- 奧義智慧科技 \| *2020/10 - 2024/02*<br />
+進行資安研究，公開研究詳見 [Speaking & Teaching](#speaking--teaching)。
 
-**實習生** \| CSCS 公民團體資安暨隱私交流計劃 \| *2023/12 - 2024/03*
-- 更新 NGO 設備隱私與資安健檢表
-- 資安與隱私教材編輯松
-- 手機應用程式資安與隱私
+**實習生** -- CSCS 公民團體資安暨隱私交流計劃 \| *2023/12 - 2024/03*<br />
+主要協助更新 NGO 設備隱私與資安健檢表、參與資安與隱私教材編輯，與調查手機應用程式的資安與隱私問題。
 
-**開發部員** \| 梅竹黑客松 \| *2020/12 - 2021/10*
-- 使用 mongodb 和 express.js 進行網頁後端開發
+**開發部員** -- 梅竹黑客松 \| *2020/12 - 2021/10*<br />
+使用 mongodb 和 express.js 進行網頁後端開發。
 
 ## Education
 - **國立臺灣大學** \| 資訊工程研究所
@@ -33,6 +32,16 @@ In my free time, I like to read comics, play video games, and read books. You ca
 - **國立清華大學** \| 資訊工程學系
 - **國立臺南第一高級中學**
   - [資訊社 T19 副社長](https://www.tfcis.org/about/intro.php)
+
+## Publication
+
+[**Poster: YFuzz: Data-Driven Fuzzing**](https://dl.acm.org/doi/10.1145/3658644.3691420)<br />
+Y. Chang, **C.-C. Huang**, T. Mori, H.-C. Hsiao<br />
+In ACM Conference on Computer and Communications Security (CCS), October 2024.
+
+[**Vision based Virtual Guidance for Navigation**](https://arxiv.org/abs/2303.02731v1)<br />
+H.-K. Yang, Y.-Y. Chen, T.-C. Chiang, C.-C. Hsu, **C.-C. Huang**, C.-W. Huang, J.-M. Liu, T.-R. Liu, T.-C. Hsiao, C.-Y. Lee<br />
+arXiv preprint arXiv:2303.02731v1, 2023.
 
 ## Speaking & Teaching
 
