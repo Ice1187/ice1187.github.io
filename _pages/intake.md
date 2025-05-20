@@ -8,6 +8,10 @@ last_modified_at: 2025-04-23
 
 今年讀過有趣的書、漫畫、文章和網站。
 
+- The C programming language (2nd Edition)
+- 烙印勇士
+- 四葉妹妹
+- 心[^2]
 - 狼與辛香料
 - 直到夜色溫柔
 - 北極百貨的秋乃小姐
@@ -18,7 +22,8 @@ last_modified_at: 2025-04-23
 - 偕雲前往北北西
 - 撒哈拉的故事
 
-[^1]: 作者為村上龍，少這個關鍵字好像有點難 Google 到 XD
+[^1]: 作者是村上龍，少這個關鍵字好像有點難 Google 到 XD
+[^2]: 作者為夏目漱石
 {:footnotes}
 
 ## Things Online I found interesting
