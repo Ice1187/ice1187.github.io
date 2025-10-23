@@ -8,6 +8,12 @@ last_modified_at: 2025-04-23
 
 今年讀過有趣的書、漫畫、文章和網站。
 
+- Bare-Metal Embedded C Programming: Develop high-performance embedded systems with C for Arm microcontrollers
+- 水流向大海
+- 風之谷
+- 蜂蜜幸運草
+- 再見繪梨
+- 琉璃龍龍
 - 「沒有人」的運動：黑客、鄉民、與 g0v 零時政府的數位行動主義
 - 子彈是餘生
 - 今晚吃壽喜燒喔！
