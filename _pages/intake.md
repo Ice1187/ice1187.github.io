@@ -1,6 +1,6 @@
 ---
 permalink: /intake/
-title: "輸入 Intake"
+title: "閱讀 Intake"
 last_modified_at: 2025-04-23
 ---
 
@@ -8,6 +8,7 @@ last_modified_at: 2025-04-23
 
 今年讀過有趣的書、漫畫、文章和網站。
 
+- What Is eBPF? An Introduction to a New Generation of Networking, Security, and Observability Tools
 - Bare-Metal Embedded C Programming: Develop high-performance embedded systems with C for Arm microcontrollers
 - 水流向大海
 - 風之谷
