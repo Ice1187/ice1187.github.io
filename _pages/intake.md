@@ -6,8 +6,11 @@ last_modified_at: 2025-04-23
 
 ## 近期閱讀 Recently Digest
 
-今年讀過有趣的書、漫畫、文章和網站。
+今年讀過的漫畫、書和看過的電影。
 
+**書 & 漫畫**
+
+- Threat Modeling: Designing for Security
 - What Is eBPF? An Introduction to a New Generation of Networking, Security, and Observability Tools
 - Bare-Metal Embedded C Programming: Develop high-performance embedded systems with C for Arm microcontrollers
 - 水流向大海
@@ -33,6 +36,14 @@ last_modified_at: 2025-04-23
 - 山與食欲與我
 - 偕雲前往北北西
 - 撒哈拉的故事
+
+**電影**
+
+- 藍色巨星
+- 鏈鋸人 蕾潔篇
+- 一一
+- La La Land
+- 花束般的戀愛
 
 [^1]: 作者是村上龍，少這個關鍵字好像有點難 Google 到 XD
 [^2]: 作者為夏目漱石
