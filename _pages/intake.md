@@ -10,6 +10,7 @@ last_modified_at: 2025-04-23
 
 **書 & 漫畫**
 
+- Emotional Design
 - Threat Modeling: Designing for Security
 - What Is eBPF? An Introduction to a New Generation of Networking, Security, and Observability Tools
 - Bare-Metal Embedded C Programming: Develop high-performance embedded systems with C for Arm microcontrollers
@@ -39,6 +40,7 @@ last_modified_at: 2025-04-23
 
 **電影**
 
+- 天使之卵
 - 藍色巨星
 - 鏈鋸人 蕾潔篇
 - 一一
