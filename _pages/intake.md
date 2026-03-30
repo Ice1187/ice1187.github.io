@@ -10,6 +10,7 @@ last_modified_at: 2025-04-23
 
 **書 & 漫畫**
 
+- Storytelling with Data: A Data Visualization Guide for Business Professionals
 - Emotional Design
 - Threat Modeling: Designing for Security
 - What Is eBPF? An Introduction to a New Generation of Networking, Security, and Observability Tools
