@@ -66,7 +66,7 @@ An Analysis on the Recent Malicious Documents and Their Techniques | SECCON 2022
 ## Projects
 {% include github-repo-card owner="ice1187" repo="TW-Security-and-CTF-Resource" %}
 {% include github-repo-card owner="ice1187" repo="ladyflavor-nowpo-wiki" %}
-- [Untitled TechShare 讀書會](https://alanhuang.notion.site/Untitled-TechShare-b698b6c407364f9ebc4554ad1d97ec8c)
+- [Untitled TechShare 讀書會](https://alans-dev.notion.site/Untitled-TechShare-b698b6c407364f9ebc4554ad1d97ec8c)
 
 ## CTFs
 
